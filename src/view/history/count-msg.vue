@@ -49,10 +49,10 @@
             </div>
 
 
-            <div class="pieChart" ref="pieChart" style="cursor: pointer;">
-
+            <div class="pieChart" id="pieChart" style="cursor: pointer;">
+                <!-- <chart-pie style="height: 300px;" :value="pieData" text="当日车辆统计"></chart-pie> -->
                 <!-- <Card shadow>
-          <chart-pie style="height: 300px;" :value="pieData" text="用户访问来源"></chart-pie>
+          
         </Card> -->
             </div>
             <div class="lineChart" id="lineChart" style="cursor: pointer;">
@@ -177,20 +177,26 @@ export default {
             lisTimer: null,
             orgCode: localStorage.getItem("orgCode"),
             pieData: [
-                { value: 335, name: '直接访问' },
-                { value: 310, name: '邮件营销' },
-                { value: 234, name: '联盟广告' },
-                { value: 135, name: '视频广告' },
-                { value: 1548, name: '搜索引擎' }
+                { value: 335, name: '2轴18吨车型' },
+                { value: 310, name: '3轴27吨车型' },
+                { value: 234, name: '3轴25吨车型' },
+                { value: 135, name: '4轴31吨车型' },
+                { value: 156, name: ' 4轴36吨车型' },
+                { value: 89, name: '5轴42吨车型' },
+                { value: 254, name: '5轴43吨车型' },
+                { value: 1548, name: '6轴及以上' },
+
             ],
+
+            lineTitle:['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
             lineData: [
                 13253,
                 34235,
                 26321,
-                12340,
+                52340,
                 24643,
-                1322,
-                1324
+                23221,
+                63214
             ]
         };
     },
@@ -209,23 +215,33 @@ export default {
 
         },
         initPieCharts() {
-            let myChart = this.$echarts.init(this.$refs.pieChart);
-            //let myChart = this.$echarts.init(document.getElementById("pieChart"));
+            //let myChart = this.$echarts.init(this.$refs.pieChart);
+            let myChart = this.$echarts.init(document.getElementById("pieChart"));
 
             // 绘制图表
             myChart.setOption({
-
+                title: {
+                    text: '当日车辆统计',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 16,
+                    }
+                },
                 tooltip: {
                     show: true,
-                    trigger: 'item'
+                    trigger: 'item',
+                    //  confine: true,//限制tooltip在图表范围内展示
+                    // extraCssText: 'max-height:40%;overflow:scroll',//最大高度以及超出处理
+                    // enterable: true//鼠标可以进入tooltip区域，使用滚动条
                 },
                 legend: {
                     top: '5%',
-                    left: 'center'
+                    left: '0',
+                    orient: 'vertical'
                 },
                 series: [
                     {
-                        name: 'Access From',
+                        name: '车型',
                         type: 'pie',
                         radius: ['40%', '70%'],
                         avoidLabelOverlap: false,
@@ -236,8 +252,8 @@ export default {
                         emphasis: {
                             label: {
                                 show: true,
-                                fontSize: 40,
-                                fontWeight: 'bold'
+                                fontSize: 20,
+
                             }
                         },
                         labelLine: {
@@ -253,9 +269,9 @@ export default {
             // 绘制图表
             myChart.setOption({
                 title: {
-                    text: '当日24小时车流量趋势',
+                    text: '近一周车流量趋势',
                     textStyle: {
-                        fontSize: 15,
+                        fontSize: 16,
                     }
                 },
                 tooltip: {
@@ -277,7 +293,7 @@ export default {
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    data: this.lineTitle
                 },
                 yAxis: {
                     type: 'value'

@@ -1,9 +1,23 @@
 <template>
     <div>
         <!-- :style="{width:scrollerWidth,height:scrollerHeight}" -->
-        <label prop="name">&nbsp;姓名：&nbsp;</label>
+        <label prop="name">&nbsp;车牌：&nbsp;</label>
         <Input v-model="carNo" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+        <label prop="name">&nbsp;车道：&nbsp;</label>
+        <Input v-model="lane" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+        <label prop="name">&nbsp;限重：&nbsp;</label>
+        <Input v-model="limitAmt" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+        <label prop="name">&nbsp;轴数：&nbsp;</label>
+        <Input v-model="axisNum" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+
+        <label prop="name">&nbsp;日期范围：&nbsp;</label>
+        <DatePicker type="daterange" v-model="datePicker" :options="options2" 
+            placeholder="选择日期范围" style="width: 200px"></DatePicker>
+
+
         <Button @click="search" type="primary" class="input-search" icon="ios-search">查询</Button>&nbsp;&nbsp;
+        <Button @click="cancel" type="error" icon="md-refresh" class="input-search">重置</Button>&nbsp;&nbsp;
+
         <Table :columns="columns1" :data="tableData1" size="small" ref="table" highlight-row :height="tablecolHeight"
             :width="tableWidth">
             <template slot-scope="{ row }" slot="name">
@@ -27,13 +41,46 @@
 
 <script>
 import { getCheckDataList } from '@/api/checkData'
+import { dateFormat } from '@/libs/filters'
 
 
 export default {
     name: "check_history_page",
+    props: ['tablecolHeight', 'tableWidth'],
 
     data() {
         return {
+            options2: {
+                shortcuts: [
+                    {
+                        text: '近一周',
+                        value() {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            return [start, end];
+                        }
+                    },
+                    {
+                        text: '近一个月',
+                        value() {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                            return [start, end];
+                        }
+                    },
+                    {
+                        text: '近三个月',
+                        value() {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                            return [start, end];
+                        }
+                    }
+                ]
+            },
             formValidate: {
                 name: "",
                 flight: "",
@@ -135,24 +182,42 @@ export default {
             // 这里需要设置原数据为空
             // 好像跟实例化一样  不然会出错的
             tableData1: [],
-            tablecolHeight: 0,
-            tableWidth: 0,
+
             pageList: [30, 50, 100, 500],
 
             carNo: "",
             lane: "",
             limitAmt: "",
             axisNum: "",
+            datePicker: [],
+            startT:"",
+            endT:"",
         };
     },
     // 方法
     methods: {
         ok() { },
-        cancel() { },
+        cancel() { 
+            this.carNo = "";
+            this.lane = "";
+            this.limitAmt = "";
+            this.axisNum = "";
+            this.datePicker = [];
+            this.search();
+        },
         // 查找按钮
         search() {
+            this.startT='';
+            this.endT='';
             this.current = 1
-            this.handlePreListApproveHistory();
+            const start = this.datePicker[0];
+            const end = this.datePicker[1];
+            if (start && start !== '' && end && end !== '') {
+                this.startT = dateFormat(start, "YYYY-MM-DD")
+                this.endT = dateFormat(end, "YYYY-MM-DD")
+            }
+
+            this.handleListApproveHistory();
         },
         show(index, type) {
             let data = [];
@@ -178,12 +243,21 @@ export default {
 
 
         handleListApproveHistory() {
-            getCheckDataList(this.current1, this.pageSize1).then(res => {
+            let data = {
+                carNo: this.carNo ? this.carNo : null,
+                lane: this.lane ? this.lane : null,
+                limitAmt: this.limitAmt ? this.limitAmt : null,
+                axisNum: this.axisNum ? this.axisNum : null,
+                startT: this.startT ? this.startT : null,
+                endT: this.endT ? this.endT : null,
+            };
+
+            getCheckDataList(this.current1, this.pageSize1,data).then(res => {
                 const data = res.data.data;
                 this.tableData1 = data.list;
                 this.dataCount1 = data.total;
             }).catch(err => {
-                console.info(err)
+                //console.info(err)
             })
 
         },
@@ -196,7 +270,7 @@ export default {
             this.handleListApproveHistory();
         },
         changePageSize1(size) {
-            console.info(size);
+            //console.info(size);
             this.pageSize1 = size;
             this.handleListApproveHistory();
         },
@@ -212,20 +286,12 @@ export default {
     //     this.handlePreListApproveHistory();
     // },
     mounted() {
-        this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 255;
-        this.tableWidth = (window.innerWidth * 0.65);
+        ////console.info(this.$parent.tablecolHeight);
+        // this.tablecolHeight = this.$parent.tablecolHeight;
+        // this.tableWidth =  this.$parent.tableWidth;;
         this.handleListApproveHistory();
 
     },
-    computed: {
-        scrollerWidth: function () {
-            return (window.innerWidth * 0.66) + "px";
-        },
-        scrollerHeight: function () {
-            return (window.innerHeight * 0.88) + "px";
-        }
 
-
-    },
 };
 </script>

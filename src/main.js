@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import iView from 'iview'
-import ViewUI from 'view-design'
+//import ViewUI from 'view-design'
 import i18n from '@/locale'
 import config from '@/config'
 import importDirective from '@/directive'
@@ -20,6 +20,7 @@ import 'view-design/dist/styles/iview.css';
 import '@/assets/fonts/font.css';
 import echarts from "echarts";
 import filters from '@/libs/filters'
+
 Vue.prototype.$echarts = echarts;
 
 
@@ -32,7 +33,7 @@ Object.keys(filters).forEach(k => {
 /* eslint-disable */
 // if (process.env.NODE_ENV !== 'production') require('@/mock')
 
-Vue.use(ViewUI, {
+Vue.use(iView, {
   i18n: (key, value) => i18n.t(key, value)
 })
 

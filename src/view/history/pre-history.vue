@@ -1,6 +1,7 @@
 <template>
     <!-- :style="{width:scrollerWidth,height:scrollerHeight}" -->
-    <div style="overflow:auto;height: 100%;width: 100%;">
+
+    <div style="overflow:hidden;height: 100%;width: 100%;">
         <div class="left-content">
             <Tabs type="card">
                 <!-- 预检历史数据展示 -->
@@ -8,12 +9,19 @@
                     <label prop="name">&nbsp;车牌：&nbsp;</label>
                     <Input v-model="carNo" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
                     <label prop="name">&nbsp;车道：&nbsp;</label>
-                    <Input v-model="lane" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+                    <Input v-model="lane" class="input-search" type="number" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
                     <label prop="name">&nbsp;限重：&nbsp;</label>
-                    <Input v-model="limitAmt" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+                    <Input v-model="limitAmt" class="input-search" type="number" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
                     <label prop="name">&nbsp;轴数：&nbsp;</label>
-                    <Input v-model="axisNum" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+                    <Input v-model="axisNum" class="input-search" type="number" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+
+                    <label prop="name">&nbsp;日期范围：&nbsp;</label>
+                    <DatePicker type="daterange" v-model="datePicker" :options="options2" placeholder="选择日期范围"
+                        style="width: 200px"></DatePicker>
+
                     <Button @click="search" type="primary" icon="ios-search" class="input-search">查询</Button>&nbsp;&nbsp;
+
+                    <Button @click="cancel" type="error" icon="md-refresh" class="input-search">重置</Button>&nbsp;&nbsp;
                     <Table :columns="columns" :data="tableData" size="small" ref="table" highlight-row
                         :height="tablecolHeight" :width="tableWidth">
                         <!-- <template slot-scope="{ row }" slot="name">
@@ -36,20 +44,21 @@
 
                 <!-- 精检历史数据展示 -->
                 <TabPane label="精检历史数据" name="name3">
-                    <checkHistory></checkHistory>
+                    <checkHistory :tablecolHeight="tablecolHeight" :tableWidth="tableWidth"></checkHistory>
                 </TabPane>
 
                 <!-- 情报板历史数据展示 -->
                 <TabPane label="情报板历史数据" name="name4">
-                    <ledHistory></ledHistory>
+                    <ledHistory :tablecolHeight="tablecolHeight" :tableWidth="tableWidth"></ledHistory>
                 </TabPane>
 
                 <!-- 车牌历史数据展示 -->
                 <TabPane label="车牌历史数据展示" name="name5">
-                    <carHistory></carHistory>
+                    <carHistory :tablecolHeight="tablecolHeight" :tableWidth="tableWidth"></carHistory>
                 </TabPane>
             </Tabs>
         </div>
+
         <count-msg></count-msg>
 
     </div>
@@ -62,11 +71,12 @@ import './pre-history.less';
 
 import CountMsg from './count-msg.vue'
 import { getPreCheckDataHistoryList } from '@/api/preCheckDataHistory'
-import { getCheckDataList } from '@/api/checkData'
-import { getLedList } from '@/api/led'
+// import { getCheckDataList } from '@/api/checkData'
+// import { getLedList } from '@/api/led'
 import checkHistory from './check-history.vue'
 import ledHistory from './led-history.vue'
 import carHistory from './car-no-history.vue'
+import { dateFormat } from '@/libs/filters'
 
 
 
@@ -74,6 +84,7 @@ import carHistory from './car-no-history.vue'
 
 export default {
     name: "prehis_page",
+
     components: {
         CountMsg,
         checkHistory,
@@ -82,6 +93,37 @@ export default {
     },
     data() {
         return {
+            options2: {
+                shortcuts: [
+                    {
+                        text: '近一周',
+                        value() {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            return [start, end];
+                        }
+                    },
+                    {
+                        text: '近一个月',
+                        value() {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                            return [start, end];
+                        }
+                    },
+                    {
+                        text: '近三个月',
+                        value() {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                            return [start, end];
+                        }
+                    }
+                ]
+            },
 
 
             // modal开始为false
@@ -106,16 +148,13 @@ export default {
 
             // 初始化信息总条数
             dataCount: 0,
-            dataCount1: 1,
-            dataCount2: 1,
+
             //当前页数
             current: 1,
-            current1: 1,
-            current2: 1,
+
             // 每页显示多少条
             pageSize: 30,
-            pageSize1: 30,
-            pageSize2: 30,
+
             // 设置table的表头
             columns: [
                 // {
@@ -125,157 +164,84 @@ export default {
                 // },
                 {
                     title: "流水号",
+                    align: "center",
                     width: 200,
                     key: "preNo"
                 },
                 {
                     title: "车牌",
+                    align: "center",
                     key: "carNo"
                 },
                 {
                     title: "自重(吨)",
+                    align: "center",
                     key: "weight"
                 },
                 {
                     title: "限重(吨)",
+                    align: "center",
                     key: "limitAmt"
                 },
                 {
                     title: "轴数",
+                    align: "center",
                     key: "axisNum"
                 },
                 {
                     title: "车速(km/h)",
+                    align: "center",
                     key: "speed"
                 },
                 {
                     title: "车道",
+                    align: "center",
                     key: "lane"
                 }
                 ,
                 {
                     title: "时间",
                     width: 200,
+                    align: "center",
                     key: "createTime"
+                },
+                {
+                    title: "图片",
+                    width: 200,
+                    align: "center",
+                    className: 'img-custor',
+                    key: "img",
+                    render: (h, params) => {
+                        const data = params.row.img
+                        //console.info(data)
+                        if (data && data.length !== 0)
+                            return h('Icon', {
+                                props: {
+                                    type: 'md-image',
+                                    size: 24,
+                                },
+                                on: {
+                                    click: () => {
+                                        this.ok(data)
+                                    }
+                                }
+                            })
+                        else
+                            return h('span', '');
+                    }
+
                 },
                 {
                     title: "操作",
                     slot: "action",
                     align: "center"
                 }
-            ],
-
-            columns1: [
-                // {
-                //     title: "序号",
-                //     type: "index",
-                //     width: 70
-                // },
-                {
-                    title: "流水号",
-                    width: 150,
-                    key: "code"
-                },
-                {
-                    title: "车牌",
-                    width: 150,
-                    key: "carNo"
-                },
-
-                {
-                    title: "货物",
-                    key: "goods"
-                },
-                {
-                    title: "初检",
-
-                    key: "amt"
-                },
-                {
-                    title: "初检超载",
-                    // width: 200,
-                    key: "overAmt"
-                },
-
-                {
-                    title: "初检时间",
-                    width: 200,
-                    key: "createTime"
-                },
-                {
-                    title: "初检员",
-                    width: 150,
-                    key: "operName"
-                },
-
-                {
-                    title: "复检",
-                    key: "checkAmt"
-                },
-                {
-                    title: "复检超载",
-
-                    key: "checkUnload"
-                },
-                {
-                    title: "复检时间",
-                    width: 200,
-                    key: "checkTime"
-                },
-                {
-                    title: "复检员",
-                    width: 150,
-                    key: "checkOper"
-                },
-                {
-                    title: "操作",
-                    slot: "action",
-                    align: "center"
-                }
-            ],
-
-            columns2: [
-                {
-                    title: "序号",
-                    type: "index",
-                    width: 70
-                },
-                // {
-                //     title: "流水号",
-                //     width: 200,
-                //     key: "preNo"
-                // },
-                {
-                    title: "名字",
-
-                    key: "name"
-                },
-                {
-                    title: "内容",
-                    key: "content"
-                },
-                {
-                    title: "时间",
-                    width: 200,
-                    key: "createTime"
-                },
-                {
-                    title: "检测站",
-                    key: "limitAmt"
-                },
-
-                // {
-                //     title: "操作",
-                //     slot: "action",
-                //     align: "center"
-                // }
             ],
             // 设置表格的数据
             // 这里需要设置原数据为空
             // 好像跟实例化一样  不然会出错的
             tableData: [],
-            tableData1: [],
-            tableData2: [],
+
             tablecolHeight: 0,
             tableWidth: 0,
             pageList: [30, 50, 100, 500],
@@ -284,16 +250,46 @@ export default {
             lane: "",
             limitAmt: "",
             axisNum: "",
+            datePicker: [],
+            startT: "",
+            endT: "",
         };
     },
     // 方法
     methods: {
-        ok() { },
-        cancel() { },
+        ok(index) {
+            alert(index)
+        },
+
         // 查找按钮
         search() {
+        
+            this.startT = '';
+            this.endT = '';
+            const start = this.datePicker[0];
+            const end = this.datePicker[1];
+            if (start && start !== '' && end && end !== '') {
+                this.startT = dateFormat(start, "YYYY-MM-DD")
+                this.endT = dateFormat(end, "YYYY-MM-DD")
+            }
+
+
+
+
             this.current = 1
             this.handlePreListApproveHistory();
+
+        },
+        cancel() {
+            this.carNo = "";
+            this.lane = "";
+            this.limitAmt = "";
+            this.axisNum = "";
+            this.datePicker = [];
+            this.search();
+
+
+
 
         },
         // 新增按钮的单击事件
@@ -371,12 +367,17 @@ export default {
 
         // 分页
         handlePreListApproveHistory() {
+           
             let data = {
                 carNo: this.carNo ? this.carNo : null,
                 lane: this.lane ? this.lane : null,
                 limitAmt: this.limitAmt ? this.limitAmt : null,
                 axisNum: this.axisNum ? this.axisNum : null,
-            };
+                startT: this.startT ? this.startT : null,
+                endT: this.endT ? this.endT : null,
+            }
+
+
             // let data={
             //     carNo:"323",
             //     lane:2
@@ -386,60 +387,24 @@ export default {
                 this.tableData = data.list;
                 this.dataCount = data.total;
             }).catch(err => {
-                console.info(err)
+                //console.info(err)
             })
 
         },
 
 
-        handleListApproveHistory() {
-            getCheckDataList(this.current1, this.pageSize1).then(res => {
-                const data = res.data.data;
-                this.tableData1 = data.list;
-                this.dataCount1 = data.total;
-            }).catch(err => {
-                console.info(err)
-            })
 
-        },
 
-        handleLedListApproveHistory() {
-            getLedList(this.current2, this.pageSize2).then(res => {
-                const data = res.data.data;
-                this.tableData2 = data.list;
-                this.dataCount2 = data.total;
-            }).catch(err => {
-                console.info(err)
-            })
 
-        },
 
         changepage(index) {
             this.current = index;
             this.handlePreListApproveHistory();
         },
         changePageSize(size) {
-            console.info(size);
+            //console.info(size);
             this.pageSize = size;
             this.handlePreListApproveHistory();
-        },
-        changepage1(index) {
-            this.current1 = index;
-            this.handleListApproveHistory();
-        },
-        changePageSize1(size) {
-            console.info(size);
-            this.pageSize1 = size;
-            this.handleListApproveHistory();
-        },
-        changepage2(index) {
-            this.current2 = index;
-            this.handleLedListApproveHistory();
-        },
-        changePageSize2(size) {
-            console.info(size);
-            this.pageSize2 = size;
-            this.handleLedListApproveHistory();
         },
 
 
@@ -453,11 +418,10 @@ export default {
     //     this.handlePreListApproveHistory();
     // },
     mounted() {
-        this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 255;
+        this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 30;
         this.tableWidth = (window.innerWidth * 0.65);
         this.handlePreListApproveHistory();
-        this.handleListApproveHistory();
-        this.handleLedListApproveHistory();
+
     },
     computed: {
         scrollerWidth: function () {

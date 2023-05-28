@@ -117,7 +117,7 @@ export default {
             self.$Message.error("两次密码不一致");
             return;
           }
-          console.info(params)
+          ////console.info(params)
           modifyPwd(params).then(res => {
             const data = res.data;
             if (data.code != 200) {

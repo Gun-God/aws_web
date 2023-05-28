@@ -129,8 +129,8 @@ export default {
           // let formData = new FormData();
           // formData.append("id",1);
           // formData.append("msg",50000);
-           console.info(params)
-          // console.info(formData)
+           //console.info(params)
+          // //console.info(formData)
           updateById(params).then(res => {
             if (self.modalTitle == "新增") {
             // 获取需要渲染到页面中的数据
@@ -178,7 +178,7 @@ export default {
     },
     // 清除文本框  重置
     handleReset(name) {
-      console.info(name);
+      //console.info(name);
       this.$refs[name].resetFields();
     },
     // 详情显示
@@ -194,7 +194,7 @@ export default {
       getSettingsList().then(res => {
         this.tableData = res.data.data;
       }).catch(err => {
-        console.info(err)
+        //console.info(err)
       })
 
     },

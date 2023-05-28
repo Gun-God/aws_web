@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
-import { Message } from 'view-design'
+//import { Message } from 'view-design'
+import { Message } from 'iview'
 // import { Spin } from 'iview'
 import { setToken,getToken} from '@/libs/util'
 const addErrorLog = errorInfo => {
@@ -47,7 +48,7 @@ class HttpRequest {
       this.queue[url] = true
       return config
     }, error => {
-      console.info("断网")
+      //console.info("断网")
       return Promise.reject(error)
     })
     // 响应拦截

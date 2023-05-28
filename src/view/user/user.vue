@@ -178,7 +178,7 @@ export default {
           key: "sex",
           render: (h, params) => {
             const data = params.row.sex
-            console.info(params)
+            //console.info(params)
             if (data == 0)
               return h('span', '男');
             else
@@ -246,7 +246,7 @@ export default {
       self.$refs[name].validate(valid => {
         if (valid) {
           var params = JSON.parse(JSON.stringify(self.formValidate));
-          console.info(params)
+          //console.info(params)
           if (self.modalTitle == "修改") {
 
 
@@ -297,11 +297,11 @@ export default {
       this.itemIndex = index;
       this.formValidate = JSON.parse(JSON.stringify(item));
       this.formValidate.sex = this.formValidate.sex + ""
-      console.info(this.formValidate)
+      //console.info(this.formValidate)
     },
     // 删除一条数据
     remove(index,id) {
-      //console.info(index)
+      ////console.info(index)
       deleteById(id).then(res => {
         const data = res.data;
         debugger
@@ -324,7 +324,7 @@ export default {
     // 清除文本框  重置
     handleReset(name) {
 
-      console.info(111)
+      //console.info(111)
       this.$refs[name].resetFields();
     },
     // 详情显示
@@ -359,7 +359,7 @@ export default {
         this.tableData = data.list;
         this.dataCount = data.total;
       }).catch(err => {
-        console.info(err)
+        //console.info(err)
       })
 
     },
@@ -369,7 +369,7 @@ export default {
       this.handleListApproveHistory();
     },
     changePageSize(size) {
-      console.info(size);
+      //console.info(size);
       this.pageSize = size;
       this.handleListApproveHistory();
     },

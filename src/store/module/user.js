@@ -90,7 +90,7 @@ export default {
           const data = res.data
           if (data.code == 200) {
             debugger
-            console.info("登录成功");
+            //console.info("登录成功");
              localStorage.setItem('token', data.data.token);
              commit('setToken', data.data.token);
              commit('setAccess', ['admin']);
@@ -107,7 +107,7 @@ export default {
             // localStorage.setItem('roleList', JSON.stringify(res.res.roleList))
             // localStorage.setItem('resourceList', JSON.stringify(res.res.resourceList))
           }else{
-            console.info("登录失败");
+            //console.info("登录失败");
           }
       
             // initRouter() //chenlf 初始化路由
@@ -167,7 +167,7 @@ export default {
     //     try {
     //       getUserInfo(state.token).then(res => {
     //         const data = res.data
-    //         console.info(data)
+    //         //console.info(data)
     //         //commit('setAvatar', data.avatar)
     //         commit('setUserName', data.username)
     //         //commit('setUserId', data.user_id)

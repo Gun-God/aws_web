@@ -7,7 +7,7 @@ import moment from "moment";
  * @returns {格式化之后的时间字符串}
  */
 
-const dateFormat = (timestamp, format = "YYYY-MM-DD HH:mm:ss") => {
+ export const dateFormat = (timestamp, format = "YYYY-MM-DD HH:mm:ss") => {
     // if (timestamp.includes('Invalid'))
     //     return '无'
     return moment(timestamp).format(format);

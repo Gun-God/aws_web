@@ -5,7 +5,11 @@
     <!-- <label prop="name">&nbsp;姓名：&nbsp;</label> -->
     <!-- <Input v-model="companyName" id="pp" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp; -->
     <!-- <Button @click="search" type="primary" icon="ios-search">查询</Button>&nbsp;&nbsp; -->
-    <Button type="primary" @click="addBus" icon="ios-add-circle-outline">新增</Button>
+    <div class="input-search">
+      <Button type="primary" @click="addBus" icon="ios-add-circle-outline">新增</Button>
+    <Button shape="circle" icon="md-refresh" style="float: right;"></Button>
+    </div>
+   
     <Table border :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight">
       <template slot-scope="{ row }" slot="name">
         <strong>{{ row.name }}</strong>
@@ -80,13 +84,13 @@
 
 
 
-    <!-- <div class="page-info">
+    <div class="page-info">
       <div>
         <Page :total="dataCount" :page-size="pageSize" show-total show-elevator show-sizer :current="current"
           :page-size-opts="pageList" prev-text="上一页" next-text="下一页" @on-change="changepage"
           @on-page-size-change="changePageSize"></Page>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
@@ -96,6 +100,7 @@ import validator from 'validator'
 
 export default {
   name: 'org_page',
+  props:['tablecolHeight'],
   data() {
     return {
       modalTitle:"",
@@ -180,7 +185,7 @@ export default {
           key: "type",
           render: (h, params) => {
             const data = params.row.type
-            console.info(params)
+            //console.info(params)
             if (data == 0)
               return h('span', '预检站');
             else
@@ -235,7 +240,7 @@ export default {
       // 这里需要设置原数据为空
       // 好像跟实例化一样  不然会出错的
       tableData: [],
-      tableHeight: 0,
+     
       pageList: [30, 50, 100, 500],
     };
   },
@@ -260,7 +265,7 @@ export default {
       self.$refs[name].validate(valid => {
         if (valid) {
           var params = JSON.parse(JSON.stringify(self.formValidate));
-          console.info(params)
+          //console.info(params)
           if (self.modalTitle == "修改") {
             updateById(params).then(res => {
               const data = res.data;
@@ -310,11 +315,11 @@ export default {
       this.itemIndex = index;
       this.formValidate = JSON.parse(JSON.stringify(item));
       this.formValidate.type = this.formValidate.type + ""
-      console.info(this.formValidate)
+      //console.info(this.formValidate)
     },
     // 删除一条数据
     remove(index,id) {
-      //console.info(index)
+      ////console.info(index)
       deleteById(id).then(res => {
         const data = res.data;
         debugger
@@ -337,7 +342,7 @@ export default {
     // 清除文本框  重置
     handleReset(name) {
 
-      console.info(111)
+      //console.info(111)
       this.$refs[name].resetFields();
     },
     // 详情显示
@@ -358,7 +363,7 @@ export default {
         this.tableData = data.list;
         this.dataCount = data.total;
       }).catch(err => {
-        console.info(err)
+        //console.info(err)
       })
 
     },
@@ -368,7 +373,7 @@ export default {
       this.handleListApproveHistory();
     },
     changePageSize(size) {
-      console.info(size);
+      //console.info(size);
       this.pageSize = size;
       this.handleListApproveHistory();
     },
@@ -383,9 +388,9 @@ export default {
   created() {
     this.handleListApproveHistory();
   },
-  mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 80
-  },
+  // mounted() {
+  //   this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 80
+  // },
   computed: {
     // colHidden: function () { //重点
     //   return this.columns.filter(function (e) {

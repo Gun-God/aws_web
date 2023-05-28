@@ -1,10 +1,6 @@
 import axios from '@/libs/api.request'
 
-
-// params: {
-//   id: 789
-// }
-export const getLedList = (page, size,data) => {
+export const getCarNoDataList = (page, size,data) => {
   
   let params={
     page: page,
@@ -12,8 +8,9 @@ export const getLedList = (page, size,data) => {
   }
   params=Object.assign(params, data)
   return axios.request({
-    url: 'awsLed/getLedList',
+    url: 'carNo/getCarNoDataList',
     params: params,
     method: 'get'
   })
 }
+

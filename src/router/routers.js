@@ -70,15 +70,17 @@ export default [
     path: '/prehis',
     name: 'prehis',
     component: Main,
-    meta:{
-      hideInMenu: false
+    meta: {
+
+      notCache: true
     },
-    
+
     children: [{
       path: '/prehis_page',
       name: 'prehis_page',
       meta: {
         icon: 'logo-buffer',
+        notCache: true,
         title: '历史数据'
       },
       component: () => import('@/view/history/pre-history.vue')
@@ -106,31 +108,31 @@ export default [
   // },
 
 
-  {
-    path: '/video',
-    name: 'video',
-    component: Main,
-    meta:{
-      hideInMenu: false
-    },
-    children: [{
-      path: '/video_page',
-      name: 'video_page',
-      meta: {
-        icon: 'md-list',
-        title: '视频监控'
-      },
-      component: () => import('@/view/tables/table.vue')
-    }
-    ]
-  },
+  // {
+  //   path: '/video',
+  //   name: 'video',
+  //   component: Main,
+  //   meta: {
+  //     hideInMenu: false
+  //   },
+  //   children: [{
+  //     path: '/video_page',
+  //     name: 'video_page',
+  //     meta: {
+  //       icon: 'md-list',
+  //       title: '视频监控'
+  //     },
+  //     component: () => import('@/view/single-page/home/home.vue')
+  //   }
+  //   ]
+  // },
 
 
   {
     path: '/information',
     name: 'information',
     component: Main,
-    meta:{
+    meta: {
       hideInMenu: false
     },
     children: [{
@@ -149,7 +151,7 @@ export default [
     path: '/user',
     name: 'user',
     component: Main,
-    meta:{
+    meta: {
       hideInMenu: false
     },
     children: [{
@@ -167,7 +169,7 @@ export default [
     path: '/setting',
     name: 'setting',
     component: Main,
-    meta:{
+    meta: {
       hideInMenu: false
     },
     children: [{
@@ -525,37 +527,37 @@ export default [
   //     }
   //   ]
   // },
-  {
-    path: '/argu',
-    name: 'argu',
-    meta: {
-      hideInMenu: true
-    },
-    component: Main,
-    children: [
-      {
-        path: 'params/:id',
-        name: 'params',
-        meta: {
-          icon: 'md-flower',
-          title: route => `{{ params }}-${route.params.id}`,
-          notCache: true,
-          beforeCloseName: 'before_close_normal'
-        },
-        component: () => import('@/view/argu-page/params.vue')
-      },
-      {
-        path: 'query',
-        name: 'query',
-        meta: {
-          icon: 'md-flower',
-          title: route => `{{ query }}-${route.query.id}`,
-          notCache: true
-        },
-        component: () => import('@/view/argu-page/query.vue')
-      }
-    ]
-  },
+  // {
+  //   path: '/argu',
+  //   name: 'argu',
+  //   meta: {
+  //     hideInMenu: true
+  //   },
+  //   component: Main,
+  //   children: [
+  //     {
+  //       path: 'params/:id',
+  //       name: 'params',
+  //       meta: {
+  //         icon: 'md-flower',
+  //         title: route => `{{ params }}-${route.params.id}`,
+  //         notCache: true,
+  //         beforeCloseName: 'before_close_normal'
+  //       },
+  //       component: () => import('@/view/argu-page/params.vue')
+  //     },
+  //     {
+  //       path: 'query',
+  //       name: 'query',
+  //       meta: {
+  //         icon: 'md-flower',
+  //         title: route => `{{ query }}-${route.query.id}`,
+  //         notCache: true
+  //       },
+  //       component: () => import('@/view/argu-page/query.vue')
+  //     }
+  //   ]
+  // },
   {
     path: '/401',
     name: 'error_401',
@@ -580,24 +582,24 @@ export default [
     },
     component: () => import('@/view/error-page/404.vue')
   },
-  {
-    path: '/message',
-    name: 'message',
-    component: Main,
-    meta: {
-      hideInBread: true,
-      hideInMenu: true
-    },
-    children: [
-      {
-        path: 'message_page',
-        name: 'message_page',
-        meta: {
-          icon: 'md-notifications',
-          title: '消息中心'
-        },
-        component: () => import('@/view/single-page/message/index.vue')
-      }
-    ]
-  },
+  // {
+  //   path: '/message',
+  //   name: 'message',
+  //   component: Main,
+  //   meta: {
+  //     hideInBread: true,
+  //     hideInMenu: true
+  //   },
+  //   children: [
+  //     {
+  //       path: 'message_page',
+  //       name: 'message_page',
+  //       meta: {
+  //         icon: 'md-notifications',
+  //         title: '消息中心'
+  //       },
+  //       component: () => import('@/view/single-page/message/index.vue')
+  //     }
+  //   ]
+  // },
 ]

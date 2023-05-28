@@ -31,7 +31,7 @@ export default {
       this.handleLogin({ userName, password }).then(res => {
           res=res.data;
        //   debugger
-          console.info(res)
+          //console.info(res)
           if (res.code == 200) {
             this.$router.push({
               name: this.$config.homeName

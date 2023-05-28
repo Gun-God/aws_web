@@ -90,4 +90,14 @@ body {
 	margin: 10px;
 	overflow: hidden;
 	text-align: center;
-}</style>
+}
+
+.input-search {
+	margin-left: .3rem;
+	margin-bottom: .3rem;
+}
+
+.img-custor {
+	cursor: pointer;
+}
+</style>

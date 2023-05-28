@@ -1,6 +1,5 @@
 <template>
-    <div style="overflow:auto;height: 100%;width: 100%;">
-
+    <div style="overflow:hidden;height: 100%;width: 100%;">
         <div class="right-div">
 
             <div class="top">
@@ -108,23 +107,17 @@
             </div>
 
         </div>
-
-
-
-
-
-
         <count-msg></count-msg>
     </div>
 </template>
 
 <script>
-import CountMsg from '../history/count-msg.vue'
+
 import './home.less'
 
 import { getAwsCarTypeList } from '@/api/awsCarType'
 import { getNowPreCheckData } from '@/api/preCheckData'
-
+import CountMsg from '../history/count-msg.vue'
 
 export default {
     name: "home_page",
@@ -156,7 +149,7 @@ export default {
             fastLane: [],
             slowLane: [],
             laneTimer: null,
-        
+
 
         };
     },
@@ -170,7 +163,7 @@ export default {
         // }
         beforeDestroy() {
             clearInterval(this.laneTimer);
-           
+
         },
         getCarTypeList() {
             getAwsCarTypeList().then(res => {

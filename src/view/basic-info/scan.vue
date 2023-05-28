@@ -32,7 +32,7 @@
       @on-visible-change="handleReset('formValidate')">
       <Form inline ref="formValidate" :model="formValidate" :label-width="100" :rules="ruleValidate">
         <row :gutter="24">
-          <Col span="12">
+          <Col span="13">
           <FormItem label="编号" prop="code">
             <Input v-model="formValidate.code" placeholder="请输入编号" :disabled="isDisable"></Input>
           </FormItem>
@@ -50,7 +50,7 @@
             <Input v-model="formValidate.password" placeholder="密码默认为123456"></Input>
           </FormItem> -->
           </Col>
-          <Col span="12">
+          <Col span="11">
           <FormItem label="端口" prop="port">
             <Input v-model="formValidate.port" placeholder="请输入端口"></Input>
           </FormItem>
@@ -99,7 +99,7 @@ import validator from 'validator'
 
 export default {
   name: 'scan_page',
-  props:['tablecolHeight'],
+  props:['tableHeight'],
   data() {
     return {
       modalTitle: "",
@@ -115,7 +115,7 @@ export default {
         deviceId: "",
         lane: "",
         port: "",
-        udpId: "",
+        udpIp: "",
         videoIp: "",
         type: "",
 
@@ -191,7 +191,7 @@ export default {
         {
           title: "端口号",
           align: "center",
-          key: "type"
+          key: "port"
         },
         {
           title: "UDP地址",

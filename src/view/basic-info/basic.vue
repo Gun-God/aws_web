@@ -2,12 +2,12 @@
   <div>
     <Tabs type="card">
       <TabPane label="检测站信息" name="name1">
-        <orgPage :tablecolHeight="tablecolHeight"></orgPage>
+        <orgPage ></orgPage>
       </TabPane>
     
 
       <TabPane label="设备信息" name="name2">
-        <scanPage :tablecolHeight="tablecolHeight"></scanPage>
+        <scanPage ></scanPage>
       </TabPane>
 
     
@@ -32,7 +32,7 @@ export default {
     }
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 80
+    //this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 80
   },
 };
 </script>

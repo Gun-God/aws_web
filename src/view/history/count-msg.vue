@@ -49,13 +49,13 @@
             </div>
 
 
-            <div class="pieChart" id="pieChart" style="cursor: pointer;">
+            <div class="pieChart" id="pieChart" >
                 <!-- <chart-pie style="height: 300px;" :value="pieData" text="当日车辆统计"></chart-pie> -->
                 <!-- <Card shadow>
           
         </Card> -->
             </div>
-            <div class="lineChart" id="lineChart" style="cursor: pointer;">
+            <div class="lineChart" id="lineChart" >
 
 
             </div>

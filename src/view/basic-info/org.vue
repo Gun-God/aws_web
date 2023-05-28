@@ -100,7 +100,7 @@ import validator from 'validator'
 
 export default {
   name: 'org_page',
-  props:['tablecolHeight'],
+  props:['tableHeight'],
   data() {
     return {
       modalTitle:"",

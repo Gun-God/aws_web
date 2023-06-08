@@ -4,7 +4,8 @@
     <Input v-model="companyName" id="pp" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
     <Button @click="search" type="primary" icon="ios-search">查询</Button>&nbsp;&nbsp; -->
     <!-- <Button type="primary" @click="addBus" icon="ios-add-circle-outline">新增</Button> -->
-    <Table border :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight">
+    <Table border :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight"
+      :row-class-name="rowClassName" class="lll">
       <template slot-scope="{ row, index }" slot="action">
         <Button type="warning" style="margin-right: 5px" size="small" @click="editBus(row, index)">编辑</Button>
         <!-- 前面的小图标会居中挡住文字  设置一下样式就好了 style="text-align:left" -->
@@ -27,7 +28,7 @@
             <Input v-model="formValidate.attributeName" placeholder="请输入"></Input>
           </FormItem>
           <FormItem label="设定值" prop="msg">
-            <Input v-model="formValidate.msg"  placeholder="请输入"></Input>
+            <Input v-model="formValidate.msg" placeholder="请输入"></Input>
           </FormItem>
           </Col>
         </row>
@@ -69,8 +70,8 @@ export default {
       handleModal: false,
       //规则
       ruleValidate: {
-        attributeName: [{ required: true, type: 'string', message: "描述不能为空！", trigger: ['blur','change'] }],
-        msg: [{ required: true, message: "参数不能为空！", trigger: ['blur','change'] }],
+        attributeName: [{ required: true, type: 'string', message: "描述不能为空！", trigger: ['blur', 'change'] }],
+        msg: [{ required: true, message: "参数不能为空！", trigger: ['blur', 'change'] }],
       },
       //  这个对应form里面的数据不能少  名字不规范我就不改了
       // columns1 和formvalidate 里面的命名要一样 别乱了
@@ -120,36 +121,36 @@ export default {
 
     // 提交数据
     handleSubmit(name) {
-      debugger
+      //debugger
       var self = this
       self.$refs[name].validate(valid => {
-        debugger
+        //debugger
         if (valid) {
           var params = JSON.parse(JSON.stringify(self.formValidate));
           // let formData = new FormData();
           // formData.append("id",1);
           // formData.append("msg",50000);
-           //console.info(params)
+          //console.info(params)
           // //console.info(formData)
           updateById(params).then(res => {
             if (self.modalTitle == "新增") {
-            // 获取需要渲染到页面中的数据
-            self.$Message.success("新增成功!");
-            self.tableData.push(params);
-          } else {
-            this.$set(self.tableData, self.itemIndex, params);
-            self.$Message.success("修改成功!");
-          }
-          self.handleModal = false;
+              // 获取需要渲染到页面中的数据
+              self.$Message.success("新增成功!");
+              self.tableData.push(params);
+            } else {
+              this.$set(self.tableData, self.itemIndex, params);
+              self.$Message.success("修改成功!");
+            }
+            self.handleModal = false;
           }).catch(err => {
-          
+
             self.$Message.error(err.data.msg);
-          
+
           })
 
 
 
-         
+
         } else {
           if (self.modalTitle == "新增") {
             self.$Message.error("新增失败!");
@@ -199,6 +200,12 @@ export default {
 
     },
 
+    rowClassName(row, index) {
+
+      return 'demo-table-info-row';
+
+    },
+
 
   },
 
@@ -211,7 +218,7 @@ export default {
     this.getSettingsList();
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 80
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 20
   }
 };
 </script>

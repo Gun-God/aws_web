@@ -85,11 +85,11 @@ export default {
           userName,
           password
         }).then(res => {
-          debugger
+          //debugger
           console.log(res)
           const data = res.data
           if (data.code == 200) {
-            debugger
+            //debugger
             //console.info("登录成功");
              localStorage.setItem('token', data.data.token);
              commit('setToken', data.data.token);

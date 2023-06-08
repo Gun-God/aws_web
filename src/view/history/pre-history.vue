@@ -2,18 +2,22 @@
     <!-- :style="{width:scrollerWidth,height:scrollerHeight}" -->
 
     <div style="overflow:hidden;height: 100%;width: 100%;">
-        <div class="left-content">
-            <Tabs type="card">
+        <div class="left-content ">
+            <Tabs value="1" @on-click="changeTabs">
                 <!-- 预检历史数据展示 -->
-                <TabPane label="预检历史数据" name="name2">
+                <TabPane label="预检历史数据" name="1">
                     <label prop="name">&nbsp;车牌：&nbsp;</label>
-                    <Input v-model="carNo" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+                    <Input v-model="carNo" class="input-search input-dark" style="width: 120px"
+                        placeholder="请输入" />&nbsp;&nbsp;
                     <label prop="name">&nbsp;车道：&nbsp;</label>
-                    <Input v-model="lane" class="input-search" type="number" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+                    <Input v-model="lane" class="input-search" type="number" style="width: 120px"
+                        placeholder="请输入" />&nbsp;&nbsp;
                     <label prop="name">&nbsp;限重：&nbsp;</label>
-                    <Input v-model="limitAmt" class="input-search" type="number" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+                    <Input v-model="limitAmt" class="input-search" type="number" style="width: 120px"
+                        placeholder="请输入" />&nbsp;&nbsp;
                     <label prop="name">&nbsp;轴数：&nbsp;</label>
-                    <Input v-model="axisNum" class="input-search" type="number" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
+                    <Input v-model="axisNum" class="input-search" type="number" style="width: 120px"
+                        placeholder="请输入" />&nbsp;&nbsp;
 
                     <label prop="name">&nbsp;日期范围：&nbsp;</label>
                     <DatePicker type="daterange" v-model="datePicker" :options="options2" placeholder="选择日期范围"
@@ -23,7 +27,7 @@
 
                     <Button @click="cancel" type="error" icon="md-refresh" class="input-search">重置</Button>&nbsp;&nbsp;
                     <Table :columns="columns" :data="tableData" size="small" ref="table" highlight-row
-                        :height="tablecolHeight" :width="tableWidth">
+                        :height="tablecolHeight" :width="tableWidth" :row-class-name="rowClassName" class="lll">
                         <!-- <template slot-scope="{ row }" slot="name">
                             <strong>{{ row.name }}</strong>
                         </template> -->
@@ -43,18 +47,19 @@
                 </TabPane>
 
                 <!-- 精检历史数据展示 -->
-                <TabPane label="精检历史数据" name="name3">
-                    <checkHistory :tablecolHeight="tablecolHeight" :tableWidth="tableWidth"></checkHistory>
+                <TabPane label="精检历史数据" name="2">
+                    <checkHistory :tablecolHeight="tablecolHeight" :tableWidth="tableWidth" ref="checkHistory">
+                    </checkHistory>
                 </TabPane>
 
                 <!-- 情报板历史数据展示 -->
-                <TabPane label="情报板历史数据" name="name4">
-                    <ledHistory :tablecolHeight="tablecolHeight" :tableWidth="tableWidth"></ledHistory>
+                <TabPane label="情报板历史数据" name="3">
+                    <ledHistory :tablecolHeight="tablecolHeight" :tableWidth="tableWidth" ref="ledHistory"></ledHistory>
                 </TabPane>
 
                 <!-- 车牌历史数据展示 -->
-                <TabPane label="车牌历史数据展示" name="name5">
-                    <carHistory :tablecolHeight="tablecolHeight" :tableWidth="tableWidth"></carHistory>
+                <TabPane label="车牌历史数据展示" name="4">
+                    <carHistory :tablecolHeight="tablecolHeight" :tableWidth="tableWidth" ref="carHistory"></carHistory>
                 </TabPane>
             </Tabs>
         </div>
@@ -153,7 +158,7 @@ export default {
             current: 1,
 
             // 每页显示多少条
-            pageSize: 30,
+            pageSize: 50,
 
             // 设置table的表头
             columns: [
@@ -201,13 +206,13 @@ export default {
                 ,
                 {
                     title: "时间",
-                    width: 200,
+                    width: 240,
                     align: "center",
                     key: "createTime"
                 },
                 {
                     title: "图片",
-                    width: 200,
+
                     align: "center",
                     className: 'img-custor',
                     key: "img",
@@ -257,13 +262,18 @@ export default {
     },
     // 方法
     methods: {
+        rowClassName(row, index) {
+
+            return 'demo-table-info-row';
+
+        },
         ok(index) {
             alert(index)
         },
 
         // 查找按钮
         search() {
-        
+
             this.startT = '';
             this.endT = '';
             const start = this.datePicker[0];
@@ -367,7 +377,7 @@ export default {
 
         // 分页
         handlePreListApproveHistory() {
-           
+
             let data = {
                 carNo: this.carNo ? this.carNo : null,
                 lane: this.lane ? this.lane : null,
@@ -406,6 +416,15 @@ export default {
             this.pageSize = size;
             this.handlePreListApproveHistory();
         },
+        changeTabs(name) {
+            if (name === '2')
+                this.$refs.checkHistory.handleListApproveHistory();
+            if (name === '3')
+                this.$refs.ledHistory.handleLedListApproveHistory();
+            if (name === '4')
+                this.$refs.carHistory.handleLedListApproveHistory();
+
+        }
 
 
     },
@@ -418,7 +437,7 @@ export default {
     //     this.handlePreListApproveHistory();
     // },
     mounted() {
-        this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 30;
+        this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop-10;
         this.tableWidth = (window.innerWidth * 0.65);
         this.handlePreListApproveHistory();
 

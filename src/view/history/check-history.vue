@@ -19,7 +19,7 @@
         <Button @click="cancel" type="error" icon="md-refresh" class="input-search">重置</Button>&nbsp;&nbsp;
 
         <Table :columns="columns1" :data="tableData1" size="small" ref="table" highlight-row :height="tablecolHeight"
-            :width="tableWidth">
+            :width="tableWidth" :row-class-name="rowClassName" class="lll">
             <template slot-scope="{ row }" slot="name">
                 <strong>{{ row.name }}</strong>
             </template>
@@ -105,7 +105,7 @@ export default {
                 // },
                 {
                     title: "流水号",
-                    width: 150,
+                    width: 200,
                     align: "center",
                     key: "code"
                 },
@@ -130,20 +130,20 @@ export default {
                 {
                     title: "初检超载",
                     align: "center",
-                    // width: 200,
+                     width: 80,
                     key: "overAmt"
                 },
 
                 {
                     title: "初检时间",
                     align: "center",
-                    width: 200,
+                    width: 240,
                     key: "createTime"
                 },
                 {
                     title: "初检员",
                     align: "center",
-                    width: 150,
+                   
                     key: "operName"
                 },
 
@@ -155,13 +155,13 @@ export default {
                 {
                     title: "复检超载",
                     align: "center",
-
+  width: 80,
                     key: "checkUnload"
                 },
                 {
                     title: "复检时间",
                     align: "center",
-                    width: 200,
+                    width: 240,
                     key: "checkTime"
                 },
                 {
@@ -274,6 +274,11 @@ export default {
             this.pageSize1 = size;
             this.handleListApproveHistory();
         },
+        rowClassName(row, index) {
+
+return 'demo-table-info-row';
+
+},
 
 
     },
@@ -289,7 +294,7 @@ export default {
         ////console.info(this.$parent.tablecolHeight);
         // this.tablecolHeight = this.$parent.tablecolHeight;
         // this.tableWidth =  this.$parent.tableWidth;;
-        this.handleListApproveHistory();
+      //  this.handleListApproveHistory();
 
     },
 

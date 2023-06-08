@@ -1,16 +1,15 @@
 <template>
     <div style="overflow:hidden;height: 100%;width: 100%;">
-        <div class="right-div">
+        <div class="right-div main-div">
 
             <div class="top">
 
                 <div class="video">
-                    监控视频画面
-
+                    <img  :src="video" />
                 </div>
                 <div class="list" ref="list">
                     <Table :columns="columns1" :data="tableData" size="small" ref="table" highlight-row
-                        :height="tableHeight">
+                        :height="tableHeight" :row-class-name="rowClassName" class="lll">
                     </Table>
                 </div>
 
@@ -54,13 +53,16 @@
 
 
                     <div class="car-img">
-                        图片1
+                        <img  :src="car1" />
+
                     </div>
                     <div class="car-img">
-                        图片2
+                        <img  :src="car2" />
+
                     </div>
 
                 </div>
+                
                 <div class="right box-div">
                     <p class="title">超车道</p>
                     <div class="pdiv">
@@ -97,10 +99,12 @@
                     </div>
 
                     <div class="car-img">
-                        图片1
+                        <img  :src="car2" />
+
                     </div>
                     <div class="car-img">
-                        图片2
+                        <img  :src="car1" />
+
                     </div>
                 </div>
 
@@ -119,13 +123,22 @@ import { getAwsCarTypeList } from '@/api/awsCarType'
 import { getNowPreCheckData } from '@/api/preCheckData'
 import CountMsg from '../history/count-msg.vue'
 
+import car1 from '@/assets/images/car/car1.png'
+import car2 from '@/assets/images/car/car2.png'
+import video from '@/assets/images/car/video.png'
+
+
 export default {
     name: "home_page",
     components: {
         CountMsg,
+
     },
     data() {
         return {
+            car1,
+            car2,
+            video,
             handleModal: false,
             columns1: [
                 {
@@ -183,6 +196,11 @@ export default {
             })
 
         },
+        rowClassName(row, index) {
+
+            return 'demo-table-info-row';
+
+        }
 
 
 

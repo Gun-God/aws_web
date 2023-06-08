@@ -4,7 +4,7 @@
     <!-- <Input v-model="companyName" id="pp" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp; -->
     <!-- <Button @click="search" type="primary" icon="ios-search">查询</Button>&nbsp;&nbsp; -->
     <Button type="primary" @click="addBus" icon="ios-add-circle-outline">新增</Button>
-    <Table border :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight">
+    <Table border :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight" :row-class-name="rowClassName" class="lll">
       <template slot-scope="{ row }" slot="name">
         <strong>{{ row.name }}</strong>
       </template>
@@ -78,13 +78,13 @@
 
 
 
-    <div class="page-info">
+    <!-- <div class="page-info">
       <div>
         <Page :total="dataCount" :page-size="pageSize" show-total show-elevator show-sizer :current="current"
           :page-size-opts="pageList" prev-text="上一页" next-text="下一页" @on-change="changepage"
           @on-page-size-change="changePageSize"></Page>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -138,7 +138,7 @@ export default {
       //当前页数
       current: 1,
       // 每页显示多少条
-      pageSize: 30,
+      pageSize: 50,
 
       // 设置table的表头
       columns1: [
@@ -146,7 +146,7 @@ export default {
           title: "序号",
           type: "index",
          // type: 'selection',
-          width: 70
+        
         },
         // {
         //   title: "id",
@@ -304,7 +304,7 @@ export default {
       ////console.info(index)
       deleteById(id).then(res => {
         const data = res.data;
-        debugger
+        //debugger
         if (data.code == 200) {
           this.tableData.splice(index, 1);
           // on-click  方法 冒泡提示确定
@@ -373,6 +373,11 @@ export default {
       this.pageSize = size;
       this.handleListApproveHistory();
     },
+    rowClassName(row, index) {
+
+return 'demo-table-info-row';
+
+},
 
   },
 
@@ -385,7 +390,7 @@ export default {
     this.handleListApproveHistory();
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 80
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 20
   },
   computed: {
     colHidden: function () { //重点

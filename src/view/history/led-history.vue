@@ -2,21 +2,19 @@
     <!-- :style="{width:scrollerWidth,height:scrollerHeight}" -->
 
     <div>
-
-
         <label prop="name">&nbsp;车牌：&nbsp;</label>
         <Input v-model="carNo" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
 
         <label prop="name">&nbsp;日期范围：&nbsp;</label>
-        <DatePicker type="daterange" v-model="datePicker" :options="options2" 
-            placeholder="选择日期范围" style="width: 200px"></DatePicker>
+        <DatePicker type="daterange" v-model="datePicker" :options="options2" placeholder="选择日期范围" style="width: 200px">
+        </DatePicker>
 
 
         <Button @click="search" type="primary" icon="ios-search" class="input-search">查询</Button>&nbsp;&nbsp;
         <Button @click="cancel" type="error" icon="md-refresh" class="input-search">重置</Button>&nbsp;&nbsp;
 
         <Table :columns="columns2" :data="tableData2" size="small" ref="table" highlight-row :height="tablecolHeight"
-            :width="tableWidth">
+            :width="tableWidth" :row-class-name="rowClassName" class="lll">
             <!-- <template slot-scope="{ row }" slot="name">
                             <strong>{{ row.name }}</strong>
                         </template> -->
@@ -27,9 +25,9 @@
 
         <div class="page-info">
             <div>
-                <Page :total="dataCount2" :page-size="pageSize2" show-total show-elevator show-sizer :current="current2"
+                <Page :total="dataCount" :page-size="pageSize" show-total show-elevator show-sizer :current="current"
                     :page-size-opts="pageList" prev-text="上一页" next-text="下一页" @on-change="changepage2"
-                    @on-page-size-change="changePageSize2"></Page>
+                    @on-page-size-change="changepageSize"></Page>
             </div>
         </div>
 
@@ -94,20 +92,21 @@ export default {
 
             // 初始化信息总条数
 
-            dataCount2: 1,
+            dataCount: 1,
             //当前页数
 
-            current2: 1,
+            current: 1,
             // 每页显示多少条
 
-            pageSize2: 30,
+            pageSize: 50,
 
             columns2: [
                 {
                     title: "序号",
+                    width: 80,
                     type: "index",
                     align: "center",
-                    width: 70
+
                 },
                 // {
                 //     title: "流水号",
@@ -127,7 +126,7 @@ export default {
                 {
                     title: "时间",
                     align: "center",
-                    width: 200,
+                    width: 240,
                     key: "createTime"
                 },
                 {
@@ -151,8 +150,8 @@ export default {
             pageList: [30, 50, 100, 500],
             carNo: "",
             datePicker: [],
-            startT:"",
-            endT:"",
+            startT: "",
+            endT: "",
         };
     },
     // 方法
@@ -163,11 +162,11 @@ export default {
             this.datePicker = [];
             this.search();
 
-         },
+        },
         // 查找按钮
         search() {
-            this.startT='';
-            this.endT='';
+            this.startT = '';
+            this.endT = '';
             const start = this.datePicker[0];
             const end = this.datePicker[1];
             if (start && start !== '' && end && end !== '') {
@@ -208,10 +207,10 @@ export default {
                 endT: this.endT ? this.endT : null,
             };
 
-            getLedList(this.current2, this.pageSize2,data).then(res => {
+            getLedList(this.current, this.pageSize, data).then(res => {
                 const data = res.data.data;
                 this.tableData2 = data.list;
-                this.dataCount2 = data.total;
+                this.dataCount = data.total;
             }).catch(err => {
                 //console.info(err)
             })
@@ -220,13 +219,18 @@ export default {
 
 
         changepage2(index) {
-            this.current2 = index;
+            this.current = index;
             this.handleLedListApproveHistory();
         },
-        changePageSize2(size) {
+        changepageSize(size) {
             //console.info(size);
-            this.pageSize2 = size;
+            this.pageSize = size;
             this.handleLedListApproveHistory();
+        },
+        rowClassName(row, index) {
+
+            return 'demo-table-info-row';
+
         },
 
 
@@ -240,7 +244,7 @@ export default {
     //     this.handlePreListApproveHistory();
     // },
     mounted() {
-        this.handleLedListApproveHistory();
+        //this.handleLedListApproveHistory();
     }
 };
 </script>

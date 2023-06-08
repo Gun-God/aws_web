@@ -74,12 +74,11 @@ export default [
 
       notCache: true
     },
-
     children: [{
       path: '/prehis_page',
       name: 'prehis_page',
       meta: {
-        icon: 'logo-buffer',
+        icon: 'md-analytics',
         notCache: true,
         title: '历史数据'
       },
@@ -107,25 +106,24 @@ export default [
   //   ]
   // },
 
-
-  // {
-  //   path: '/video',
-  //   name: 'video',
-  //   component: Main,
-  //   meta: {
-  //     hideInMenu: false
-  //   },
-  //   children: [{
-  //     path: '/video_page',
-  //     name: 'video_page',
-  //     meta: {
-  //       icon: 'md-list',
-  //       title: '视频监控'
-  //     },
-  //     component: () => import('@/view/single-page/home/home.vue')
-  //   }
-  //   ]
-  // },
+  {
+    path: '/video',
+    name: 'video',
+    component: Main,
+    meta: {
+      hideInMenu: false
+    },
+    children: [{
+      path: '/video_page',
+      name: 'video_page',
+      meta: {
+        icon: 'md-videocam',
+        title: '视频监控'
+      },
+      component: () => import('@/view/video/HwVideoPlayer.vue')
+    }
+    ]
+  },
 
 
   {
@@ -139,14 +137,13 @@ export default [
       path: '/information_page',
       name: 'information_page',
       meta: {
-        icon: 'md-list',
+        icon: 'ios-albums',
         title: '信息管理'
       },
       component: () => import('@/view/basic-info/basic.vue')
     }
     ]
   },
-
   {
     path: '/user',
     name: 'user',
@@ -158,7 +155,7 @@ export default [
       path: '/user_page',
       name: 'user_page',
       meta: {
-        icon: 'md-arrow-dropdown-circle',
+        icon: 'md-contacts',
         title: '用户管理'
       },
       component: () => import('@/view/user/user.vue')
@@ -176,7 +173,7 @@ export default [
       path: '/setting_page',
       name: 'setting_page',
       meta: {
-        icon: 'md-list',
+        icon: 'md-settings',
         title: '系统设置'
       },
       component: () => import('@/view/system/table.vue')

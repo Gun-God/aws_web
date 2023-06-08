@@ -38,7 +38,7 @@ class HttpRequest {
     }
   }
   interceptors(instance, url) {
-     //  debugger
+     //  //debugger
     // 请求拦截
     instance.interceptors.request.use(config => {
       // 添加全局的loading...
@@ -89,7 +89,7 @@ class HttpRequest {
       // }
 
 
-      debugger
+      //debugger
       this.destroy(url)
       let errorInfo = error.response
       let msg=error.message

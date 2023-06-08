@@ -8,8 +8,8 @@ module.exports = {
    'prettier/prettier': 'off',
     // allow async-await
     'generator-star-spacing': 'off',
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    // allow //debugger during development
+    'no-//debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/no-parsing-error': [2, {
       'x-invalid-end-tag': false
     }],

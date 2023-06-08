@@ -1,5 +1,5 @@
 <template>
-    <div class="right-content">
+    <div class="right-content ">
         <!-- :style="{ width: scrollerRightWidth, height: scrollerHeight }" -->
         <div class="top-content">
 
@@ -9,7 +9,7 @@
             </p>
 
             <div class="car-count">
-                <p class="right-left-title">
+                <p class="right-left-title" style="margin-top: -.5rem;">
                     <Icon type="md-volume-up" size="24" />
                     当日车辆统计
                 </p>
@@ -68,7 +68,7 @@
             检测点信息
         </p>
 
-        <div class="center-content">
+        <div class="center-content ">
             <p class="right-title">
                 {{ orgObject.name }}
             </p>
@@ -103,11 +103,12 @@
             <Icon type="md-volume-up" size="24" />
             超限车列表
         </p>
-        <div class="down-content" ref="carList">
+        <div class="down-content " ref="carList">
 
 
 
-            <Table :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight1">
+            <Table :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight1"
+            :row-class-name="rowClassName" class="lll">
 
             </Table>
 
@@ -123,6 +124,8 @@ import "./count-msg.less"
 import { getPreCheckDataNewList } from '@/api/preCheckData'
 import { getOrgInfoByCode } from '@/api/nspOrg'
 import { ChartPie, ChartBar } from '_c/charts'
+import * as echarts from "echarts";
+
 
 export default {
     name: 'count-msg',
@@ -225,6 +228,7 @@ export default {
                     left: 'center',
                     textStyle: {
                         fontSize: 16,
+                        color: "#e1e5ed"
                     }
                 },
                 tooltip: {
@@ -237,7 +241,11 @@ export default {
                 legend: {
                     top: '5%',
                     left: '0',
-                    orient: 'vertical'
+                    orient: 'vertical',
+                    textStyle: {
+                        color: "#e1e5ed"
+                    }
+                    
                 },
                 series: [
                     {
@@ -272,8 +280,12 @@ export default {
                     text: '近一周车流量趋势',
                     textStyle: {
                         fontSize: 16,
+                        color: "#e1e5ed"
                     }
                 },
+                textStyle: {
+                        color: "#e1e5ed"
+                    },
                 tooltip: {
                     show: true,
                     trigger: 'axis',
@@ -293,6 +305,7 @@ export default {
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
+                    
                     data: this.lineTitle
                 },
                 yAxis: {
@@ -303,17 +316,12 @@ export default {
                         data: this.lineData,
                         type: 'line',
                         //设置面积区域为渐变效果
+                        lineStyle: {
+                            width: 1,
+                            color: "#44E2F0",
+                        },
                         areaStyle: {
-                            color: this.$echarts.graphic.LinearGradient(0, 1, 0, 0, [
-                                {
-                                    offset: 0.4,
-                                    color: "#010C17",
-                                },
-                                {
-                                    offset: 1,
-                                    color: "#44E2F0",
-                                },
-                            ]),
+                            color: "#44E2F0",
                         },
                     }
                 ]
@@ -321,7 +329,7 @@ export default {
         },
 
         getPreList() {
-            debugger
+            //debugger
             getPreCheckDataNewList(this.orgCode).then(res => {
                 this.tableData = res.data.data
             }).catch(err => {
@@ -337,7 +345,12 @@ export default {
                 console.error(err)
             })
 
-        }
+        },
+        rowClassName (row, index) {
+            
+            return 'demo-table-info-row';
+    
+    }
     },
     mounted() {
         this.beforeDestroy();
@@ -347,8 +360,8 @@ export default {
             this.getPreList();
         }, 3 * 60 * 1000)
         //  this.tableData = testData.histories;
-        this.tableHeight1 = (window.innerHeight * 0.27);
-        //this.tableHeight1 =this.$refs.carList.offsetHeight-3;
+        //this.tableHeight1 = (window.innerHeight * 0.27);
+        this.tableHeight1 =window.innerHeight - this.$refs.table.$el.offsetTop-21;
         // this.tableWidth = (window.innerWidth * 0.31);
 
         setTimeout(() => {

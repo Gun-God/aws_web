@@ -30,7 +30,7 @@ export default {
     handleSubmit ({ userName, password }) {
       this.handleLogin({ userName, password }).then(res => {
           res=res.data;
-       //   debugger
+       //   //debugger
           //console.info(res)
           if (res.code == 200) {
             this.$router.push({

@@ -547,7 +547,7 @@ export default {
       //当前页数
       current: 1,
       // 每页显示多少条
-      pageSize: 30,
+      pageSize: 50,
 
       // 设置table的表头
       columns1: [

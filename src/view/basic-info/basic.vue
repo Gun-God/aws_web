@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Tabs type="card">
+    <Tabs value="name1">
       <TabPane label="检测站信息" name="name1">
         <orgPage ></orgPage>
       </TabPane>

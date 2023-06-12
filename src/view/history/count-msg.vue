@@ -49,26 +49,23 @@
             </div>
 
 
-            <div class="pieChart" id="pieChart" >
+            <div class="pieChart" id="pieChart">
                 <!-- <chart-pie style="height: 300px;" :value="pieData" text="当日车辆统计"></chart-pie> -->
                 <!-- <Card shadow>
           
         </Card> -->
             </div>
-            <div class="lineChart" id="lineChart" >
+            <div class="lineChart" id="lineChart">
 
 
             </div>
         </div>
-
-
-
         <p class="right-left-title">
             <Icon type="md-volume-up" size="24" />
             检测点信息
         </p>
 
-        <div class="center-content ">
+        <div class="center-content">
             <p class="right-title">
                 {{ orgObject.name }}
             </p>
@@ -108,7 +105,7 @@
 
 
             <Table :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight1"
-            :row-class-name="rowClassName" class="lll">
+                :row-class-name="rowClassName" class="lll">
 
             </Table>
 
@@ -125,8 +122,6 @@ import { getPreCheckDataNewList } from '@/api/preCheckData'
 import { getOrgInfoByCode } from '@/api/nspOrg'
 import { ChartPie, ChartBar } from '_c/charts'
 import * as echarts from "echarts";
-
-
 export default {
     name: 'count-msg',
     components: {
@@ -191,7 +186,7 @@ export default {
 
             ],
 
-            lineTitle:['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            lineTitle: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
             lineData: [
                 13253,
                 34235,
@@ -202,15 +197,6 @@ export default {
                 63214
             ]
         };
-    },
-    computed: {
-        // scrollerHeight: function () {
-        //     return (window.innerHeight * 0.88) + 'px';
-        // },
-        // scrollerRightWidth: function () {
-        //     return (window.innerWidth * 0.32) + 'px';
-        // },
-
     },
     methods: {
         beforeDestroy() {
@@ -245,7 +231,7 @@ export default {
                     textStyle: {
                         color: "#e1e5ed"
                     }
-                    
+
                 },
                 series: [
                     {
@@ -272,7 +258,6 @@ export default {
                 ]
             });
         }, initLineCharts() {
-            //let myChart = this.$echarts.init(this.$refs.lineChart);
             let myChart = this.$echarts.init(document.getElementById("lineChart"));
             // 绘制图表
             myChart.setOption({
@@ -284,8 +269,8 @@ export default {
                     }
                 },
                 textStyle: {
-                        color: "#e1e5ed"
-                    },
+                    color: "#e1e5ed"
+                },
                 tooltip: {
                     show: true,
                     trigger: 'axis',
@@ -305,7 +290,7 @@ export default {
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    
+
                     data: this.lineTitle
                 },
                 yAxis: {
@@ -346,11 +331,11 @@ export default {
             })
 
         },
-        rowClassName (row, index) {
-            
+        rowClassName(row, index) {
+
             return 'demo-table-info-row';
-    
-    }
+
+        }
     },
     mounted() {
         this.beforeDestroy();
@@ -361,9 +346,8 @@ export default {
         }, 3 * 60 * 1000)
         //  this.tableData = testData.histories;
         //this.tableHeight1 = (window.innerHeight * 0.27);
-        this.tableHeight1 =window.innerHeight - this.$refs.table.$el.offsetTop-21;
+        this.tableHeight1 = window.innerHeight - this.$refs.table.$el.offsetTop - 21;
         // this.tableWidth = (window.innerWidth * 0.31);
-
         setTimeout(() => {
             this.initPieCharts();
             this.initLineCharts();

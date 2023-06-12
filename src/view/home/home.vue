@@ -125,7 +125,7 @@ import CountMsg from '../history/count-msg.vue'
 
 import car1 from '@/assets/images/car/car1.png'
 import car2 from '@/assets/images/car/car2.png'
-import video from '@/assets/images/car/video.png'
+//import video from '@/assets/images/car/video.png'
 
 
 export default {
@@ -138,7 +138,7 @@ export default {
         return {
             car1,
             car2,
-            video,
+            video:'http://cam1.infolink.ru/mjpg/video.mjpg',
             handleModal: false,
             columns1: [
                 {

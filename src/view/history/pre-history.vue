@@ -2,7 +2,7 @@
     <!-- :style="{width:scrollerWidth,height:scrollerHeight}" -->
 
     <div style="overflow:hidden;height: 100%;width: 100%;">
-        <div class="left-content ">
+        <div class="left-content">
             <Tabs value="1" @on-click="changeTabs">
                 <!-- 预检历史数据展示 -->
                 <TabPane label="预检历史数据" name="1">
@@ -73,15 +73,14 @@
 <script>
 
 import './pre-history.less';
-
-import CountMsg from './count-msg.vue'
-import { getPreCheckDataHistoryList } from '@/api/preCheckDataHistory'
+import CountMsg from './count-msg.vue';
+import { getPreCheckDataHistoryList } from '@/api/preCheckDataHistory';
 // import { getCheckDataList } from '@/api/checkData'
 // import { getLedList } from '@/api/led'
-import checkHistory from './check-history.vue'
-import ledHistory from './led-history.vue'
-import carHistory from './car-no-history.vue'
-import { dateFormat } from '@/libs/filters'
+import checkHistory from './check-history.vue';
+import ledHistory from './led-history.vue';
+import carHistory from './car-no-history.vue';
+import { dateFormat } from '@/libs/filters';
 
 
 
@@ -94,7 +93,7 @@ export default {
         CountMsg,
         checkHistory,
         ledHistory,
-        carHistory
+        carHistory,
     },
     data() {
         return {
@@ -282,10 +281,6 @@ export default {
                 this.startT = dateFormat(start, "YYYY-MM-DD")
                 this.endT = dateFormat(end, "YYYY-MM-DD")
             }
-
-
-
-
             this.current = 1
             this.handlePreListApproveHistory();
 
@@ -297,10 +292,6 @@ export default {
             this.axisNum = "";
             this.datePicker = [];
             this.search();
-
-
-
-
         },
         // 新增按钮的单击事件
         // addBus() {
@@ -428,27 +419,19 @@ export default {
 
 
     },
-    // 这个应该是加载事件  加载页面的时候就调用
-    // mounted() {
-    //   // 页面一加载就将数据给出给表格
-    //   this.tableData = testData.histories;
-    // },
-    // created() {
-    //     this.handlePreListApproveHistory();
-    // },
     mounted() {
-        this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop-10;
+        this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 10;
         this.tableWidth = (window.innerWidth * 0.65);
         this.handlePreListApproveHistory();
 
     },
     computed: {
-        scrollerWidth: function () {
-            return (window.innerWidth * 0.66) + "px";
-        },
-        scrollerHeight: function () {
-            return (window.innerHeight * 0.88) + "px";
-        }
+        // scrollerWidth: function () {
+        //     return (window.innerWidth * 0.66) + "px";
+        // },
+        // scrollerHeight: function () {
+        //     return (window.innerHeight * 0.88) + "px";
+        // }
 
 
     },

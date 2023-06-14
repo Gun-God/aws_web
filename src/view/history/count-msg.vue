@@ -16,7 +16,7 @@
                 <div class="car-liu">
                     <Icon type="md-car" size="36" />
                     <span class="cars">车流量(次) </span>
-                    <span class="car-num">2554</span>
+                    <span class="car-num">{{ carCount }}</span>
                 </div>
 
                 <div class="left-span content-span">
@@ -24,11 +24,11 @@
                         超载30%以上
                     </p>
                     <p class="dg-msg">
-                        数量：3
+                        数量：{{ limitC }}
                     </p>
 
                     <p class="dg-msg">
-                        占比：23.51%
+                        占比：{{ limitCPer }}%
                     </p>
                 </div>
                 <div class="right-span content-span">
@@ -37,11 +37,11 @@
                         100t以上
                     </p>
                     <p class="dg-msg">
-                        数量：3
+                        数量：{{ limitB }}
                     </p>
 
                     <p class="dg-msg">
-                        占比：23.51%
+                        占比：{{ limitBPer }}%
                     </p>
                 </div>
 
@@ -118,7 +118,7 @@
 
 <script>
 import "./count-msg.less"
-import { getPreCheckDataNewList } from '@/api/preCheckData'
+import { getPreCheckDataNewList, getCarCountCurrent, getCarOverLoadCurrent, getCarCountLast24H, getCarTypeCountCurrent } from '@/api/preCheckData'
 import { getOrgInfoByCode } from '@/api/nspOrg'
 import { ChartPie, ChartBar } from '_c/charts'
 import * as echarts from "echarts";
@@ -130,6 +130,11 @@ export default {
     },
     data() {
         return {
+            carCount: 0,
+            limitC: 0,
+            limitCPer: 0,
+            limitB: 0,
+            limitBPer: 0,
             handleModal: false,
             columns1: [
                 {
@@ -186,15 +191,32 @@ export default {
 
             ],
 
-            lineTitle: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            lineTitle: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
             lineData: [
-                13253,
-                34235,
-                26321,
-                52340,
-                24643,
-                23221,
-                63214
+                42,
+                132,
+                234,
+                264,
+                322,
+                221,
+                251,
+                215,
+                256,
+                125,
+                80,
+                105,
+                264,
+                235,
+                156,
+                321,
+                152,
+                423,
+                125,
+                221,
+                98,
+                107,
+                21,
+                36
             ]
         };
     },
@@ -210,7 +232,7 @@ export default {
             // 绘制图表
             myChart.setOption({
                 title: {
-                    text: '当日车辆统计',
+                    //text: '当日车辆统计',
                     left: 'center',
                     textStyle: {
                         fontSize: 16,
@@ -262,7 +284,7 @@ export default {
             // 绘制图表
             myChart.setOption({
                 title: {
-                    text: '近一周车流量趋势',
+                    text: '24小时车流量趋势',
                     textStyle: {
                         fontSize: 16,
                         color: "#e1e5ed"
@@ -294,8 +316,10 @@ export default {
                     data: this.lineTitle
                 },
                 yAxis: {
-                    type: 'value'
+                    type: 'value',
+                    minInterval: 1
                 },
+
                 series: [
                     {
                         data: this.lineData,
@@ -335,13 +359,66 @@ export default {
 
             return 'demo-table-info-row';
 
-        }
+        },
+        getCarCountCurrent() {
+            getCarCountCurrent().then(res => {
+                console.info(res)
+                this.carCount = res.data.data;
+
+            }).catch(err => {
+                console.error(err)
+            })
+
+        },
+        getCarOverLoadCurrent() {
+            getCarOverLoadCurrent().then(res => {
+                console.info(res)
+                this.limitC = res.data.data[0];
+                this.limitCPer = res.data.data[1];
+                this.limitB = res.data.data[2];
+                this.limitBPer = res.data.data[3];
+            }).catch(err => {
+                console.error(err)
+            })
+
+        },
+        getCarCountLast24H() {
+            getCarCountLast24H().then(res => {
+                console.info(res)
+                this.lineData = res.data.data[0];
+                this.lineTitle = res.data.data[1];
+                //   this.initLineCharts();
+            }).catch(err => {
+                console.error(err)
+            })
+
+        },
+        getCarTypeCountCurrent() {
+            getCarTypeCountCurrent().then(res => {
+                console.info(res)
+            }).catch(err => {
+                console.error(err)
+            })
+
+        },
+
     },
     mounted() {
         this.beforeDestroy();
         this.getPreList();
+
+
+        this.getCarCountCurrent();
+        this.getCarOverLoadCurrent();
+        this.getCarCountLast24H();
+        this.getCarTypeCountCurrent();
+
         this.getOrgInfo();
         this.lisTimer = setInterval(() => {
+            this.getCarCountCurrent();
+            this.getCarOverLoadCurrent();
+            this.getCarCountLast24H();
+            this.getCarTypeCountCurrent();
             this.getPreList();
         }, 3 * 60 * 1000)
         //  this.tableData = testData.histories;

@@ -100,6 +100,7 @@ export default {
              localStorage.setItem('orgCode', data.data.orgCode);
               //存储用户账号
              localStorage.setItem('username', data.data.username);
+             localStorage.setItem('userId', data.data.id);
            //  commit('setOrgCode', data.data.orgCode);
             // localStorage.setItem('realName', res.res.realName)
             // localStorage.setItem('userId', res.res.id)

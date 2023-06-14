@@ -100,9 +100,10 @@ import validator from 'validator'
 
 export default {
   name: 'org_page',
-  props:['tableHeight'],
+  // props:['tableHeight'],
   data() {
     return {
+      tableHeight:0,
       modalTitle:"",
       hideElement:true,
       // modal开始为false

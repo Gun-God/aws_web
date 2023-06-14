@@ -15,12 +15,6 @@
 
         <Table :columns="columns2" :data="tableData2" size="small" ref="table" highlight-row :height="tablecolHeight"
             :width="tableWidth" :row-class-name="rowClassName" class="lll">
-            <!-- <template slot-scope="{ row }" slot="name">
-                            <strong>{{ row.name }}</strong>
-                        </template> -->
-            <!-- <template slot-scope="{ row, index }" slot="action">
-                            <Button type="primary" size="small" style="margin-right: 5px" @click="show(index)">查看</Button>
-                        </template> -->
         </Table>
 
         <div class="page-info">
@@ -43,7 +37,6 @@
 
 import { getCarNoDataList } from '@/api/carNo'
 import { dateFormat } from '@/libs/filters'
-
 
 export default {
     name: "car_page",
@@ -146,7 +139,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.ok(data)
+                                        this.ok(data);
                                     }
                                 }
                             })

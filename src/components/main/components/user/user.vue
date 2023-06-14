@@ -98,7 +98,7 @@ export default {
       this.handleLogOut().then(() => {
         this.$router.push({
           name: 'login'
-        })
+        },()=>{}, ()=>{})
       })
     },
     message() {

@@ -91,7 +91,8 @@ body {
 
 .page-info {
 	color: white;
-
+	//background-color: #295587;
+	// background-image: linear-gradient(to bottom, #0f2539 85%,#295587 );
 	margin: 1rem;
 	overflow: hidden;
 	text-align: center;

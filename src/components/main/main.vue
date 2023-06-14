@@ -30,7 +30,7 @@
           <error-store v-if="$config.plugin['error-store'] && $config.plugin['error-store'].showInHeader"
             :has-read="hasReadErrorPage" :count="errorCount"></error-store>
 
-          <fullscreen v-model="isFullscreen" style="margin-right: 10px;line-height: 4.5rem;" />
+          <!-- <fullscreen v-model="isFullscreen" style="margin-right: 10px;line-height: 4.5rem;" /> -->
           <div>
             <p class="now-time">
               {{ nowTime }}
@@ -167,7 +167,7 @@ export default {
         name,
         params,
         query
-      })
+      },()=>{}, ()=>{})
     },
     handleCollapsedChange(state) {
       this.collapsed = state
@@ -236,7 +236,7 @@ export default {
     if (!this.tagNavList.find(item => item.name === this.$route.name)) {
       this.$router.push({
         name: this.$config.homeName
-      })
+      },()=>{}, ()=>{})
     }
     // 获取未读消息条数
     //this.getUnreadMessageCount();

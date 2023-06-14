@@ -95,7 +95,17 @@ export const modifyPwd = (params) => {
   })
 }
 
-
+export const getUserLogList = (page, size) => {
+  let params={
+    page: page,
+    size: size,
+  }
+  return axios.request({
+    url: 'user/getUserLog',
+    params:params,
+    method: 'get'
+  })
+}
 
 // export const getUserInfo = (token) => {
 //   return axios.request({

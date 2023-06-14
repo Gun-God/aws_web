@@ -5,7 +5,7 @@
             <div class="top">
 
                 <div class="video">
-                    <img  :src="video" />
+                    <img :src="video" />
                 </div>
                 <div class="list" ref="list">
                     <Table :columns="columns1" :data="tableData" size="small" ref="table" highlight-row
@@ -20,7 +20,7 @@
                     <p class="title">行车道</p>
                     <div class="pdiv">
                         <div class="car-time car-div">{{ slowLane.createTime }}</div>
-                        <div class="car-no car-div">{{ slowLane.carNo }}</div>
+                        <div :class="getClass(2)">{{ slowLane.carNo }}</div>
                         <div class="car-msg car-div">
                             <div class="weight pmsg">
                                 <p>
@@ -53,21 +53,21 @@
 
 
                     <div class="car-img">
-                        <img  :src="car1" />
+                        <img :src="car1" />
 
                     </div>
                     <div class="car-img">
-                        <img  :src="car2" />
+                        <img :src="car2" />
 
                     </div>
 
                 </div>
-                
+
                 <div class="right box-div">
                     <p class="title">超车道</p>
                     <div class="pdiv">
                         <div class="car-time car-div">{{ fastLane.createTime }}</div>
-                        <div class="car-no car-div hc">{{ fastLane.carNo }}</div>
+                        <div :class="getClass(1)">{{ fastLane.carNo }}</div>
                         <div class="car-msg car-div">
                             <div class="weight pmsg">
                                 <p>
@@ -99,11 +99,11 @@
                     </div>
 
                     <div class="car-img">
-                        <img  :src="car2" />
+                        <img :src="car2" />
 
                     </div>
                     <div class="car-img">
-                        <img  :src="car1" />
+                        <img :src="car1" />
 
                     </div>
                 </div>
@@ -138,7 +138,7 @@ export default {
         return {
             car1,
             car2,
-            video:'http://cam1.infolink.ru/mjpg/video.mjpg',
+            video: 'http://cam1.infolink.ru/mjpg/video.mjpg',
             handleModal: false,
             columns1: [
                 {
@@ -188,6 +188,7 @@ export default {
         },
         getNowPreCheckData() {
             getNowPreCheckData().then(res => {
+                debugger
                 const data = res.data.data
                 this.fastLane = data[0]
                 this.slowLane = data[1]
@@ -199,6 +200,23 @@ export default {
         rowClassName(row, index) {
 
             return 'demo-table-info-row';
+
+        },
+        getClass(color) {
+            console.info(color)
+            // alert(color)
+            if (color === 1) {
+                if (this.slowLane.color === 1)
+                    return 'car-no car-div';
+                else
+                    return 'car-no car-div lan';
+            }
+            else if(color === 2){
+                if (this.fastLane.color === 1)
+                    return 'car-no car-div';
+                else
+                    return 'car-no car-div lan';
+            }
 
         }
 

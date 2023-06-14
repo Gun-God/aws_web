@@ -8,6 +8,7 @@ export default {
   video_page: '视频监控',
   setting_page: '系统设置',
   user_page: "用户管理",
+  user_logger_page: "用户日志",
   components: '组件',
   count_to_page: '数字渐变',
   tables_page: '多功能表格',

@@ -71,7 +71,6 @@ export default [
     name: 'prehis',
     component: Main,
     meta: {
-
       notCache: true
     },
     children: [{
@@ -118,6 +117,7 @@ export default [
       name: 'video_page',
       meta: {
         icon: 'md-videocam',
+        notCache: true,
         title: '视频监控'
       },
       component: () => import('@/view/video/HwVideoPlayer.vue')
@@ -138,6 +138,7 @@ export default [
       name: 'information_page',
       meta: {
         icon: 'ios-albums',
+        notCache: true,
         title: '信息管理'
       },
       component: () => import('@/view/basic-info/basic.vue')
@@ -156,6 +157,7 @@ export default [
       name: 'user_page',
       meta: {
         icon: 'md-contacts',
+        notCache: true,
         title: '用户管理'
       },
       component: () => import('@/view/user/user.vue')
@@ -174,6 +176,7 @@ export default [
       name: 'setting_page',
       meta: {
         icon: 'md-settings',
+        notCache: true,
         title: '系统设置'
       },
       component: () => import('@/view/system/table.vue')
@@ -426,8 +429,8 @@ export default [
   //   ]
   // },
   {
-    path: '/error_logger',
-    name: 'error_logger',
+    path: '/user_logger',
+    name: 'user_logger',
     meta: {
       hideInBread: true,
       hideInMenu: true
@@ -435,13 +438,14 @@ export default [
     component: Main,
     children: [
       {
-        path: 'error_logger_page',
-        name: 'error_logger_page',
+        path: '/user_logger_page',
+        name: 'user_logger_page',
         meta: {
-          icon: 'ios-bug',
-          title: '错误收集'
+          icon: 'md-bug',
+          notCache: true,
+          title: '用户日志'
         },
-        component: () => import('@/view/single-page/error-logger.vue')
+        component: () => import('@/view/logger/userLog.vue')
       }
     ]
   },

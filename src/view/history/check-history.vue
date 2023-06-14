@@ -11,8 +11,8 @@
         <Input v-model="axisNum" class="input-search" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
 
         <label prop="name">&nbsp;日期范围：&nbsp;</label>
-        <DatePicker type="daterange" v-model="datePicker" :options="options2" 
-            placeholder="选择日期范围" style="width: 200px"></DatePicker>
+        <DatePicker type="daterange" v-model="datePicker" :options="options2" placeholder="选择日期范围" style="width: 200px">
+        </DatePicker>
 
 
         <Button @click="search" type="primary" class="input-search" icon="ios-search">查询</Button>&nbsp;&nbsp;
@@ -130,7 +130,7 @@ export default {
                 {
                     title: "初检超载",
                     align: "center",
-                     width: 80,
+                    width: 80,
                     key: "overAmt"
                 },
 
@@ -143,7 +143,7 @@ export default {
                 {
                     title: "初检员",
                     align: "center",
-                   
+
                     key: "operName"
                 },
 
@@ -155,7 +155,7 @@ export default {
                 {
                     title: "复检超载",
                     align: "center",
-  width: 80,
+                    width: 80,
                     key: "checkUnload"
                 },
                 {
@@ -190,14 +190,14 @@ export default {
             limitAmt: "",
             axisNum: "",
             datePicker: [],
-            startT:"",
-            endT:"",
+            startT: "",
+            endT: "",
         };
     },
     // 方法
     methods: {
         ok() { },
-        cancel() { 
+        cancel() {
             this.carNo = "";
             this.lane = "";
             this.limitAmt = "";
@@ -207,8 +207,8 @@ export default {
         },
         // 查找按钮
         search() {
-            this.startT='';
-            this.endT='';
+            this.startT = '';
+            this.endT = '';
             this.current = 1
             const start = this.datePicker[0];
             const end = this.datePicker[1];
@@ -252,7 +252,7 @@ export default {
                 endT: this.endT ? this.endT : null,
             };
 
-            getCheckDataList(this.current1, this.pageSize1,data).then(res => {
+            getCheckDataList(this.current1, this.pageSize1, data).then(res => {
                 const data = res.data.data;
                 this.tableData1 = data.list;
                 this.dataCount1 = data.total;
@@ -276,9 +276,9 @@ export default {
         },
         rowClassName(row, index) {
 
-return 'demo-table-info-row';
+            return 'demo-table-info-row';
 
-},
+        },
 
 
     },
@@ -294,7 +294,7 @@ return 'demo-table-info-row';
         ////console.info(this.$parent.tablecolHeight);
         // this.tablecolHeight = this.$parent.tablecolHeight;
         // this.tableWidth =  this.$parent.tableWidth;;
-      //  this.handleListApproveHistory();
+        //  this.handleListApproveHistory();
 
     },
 

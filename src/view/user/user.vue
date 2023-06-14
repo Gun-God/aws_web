@@ -4,19 +4,21 @@
     <!-- <Input v-model="companyName" id="pp" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp; -->
     <!-- <Button @click="search" type="primary" icon="ios-search">查询</Button>&nbsp;&nbsp; -->
     <Button type="primary" @click="addBus" icon="ios-add-circle-outline">新增</Button>
-    <Table border :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight" :row-class-name="rowClassName" class="lll">
+    <Table border :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight"
+      :row-class-name="rowClassName" class="lll">
       <template slot-scope="{ row }" slot="name">
-        <strong>{{ row.name }}</strong>
+        <!-- <strong>{{ row.name }}</strong> -->
       </template>
-      <template slot-scope="{ row, index }" slot="action" >
-        <Poptip style="text-align:left;margin-right:.5rem;" confirm title="您确定要删除该信息?" placement="left" @on-ok="remove(index,row.id)"
-          @on-cancel="cancel1">
+      <template slot-scope="{ row, index }" slot="action">
+        <Poptip style="text-align:left;margin-right:.5rem;" confirm title="您确定要删除该信息?" placement="left"
+          @on-ok="remove(index, row.id)" @on-cancel="cancel1">
           <Button type="error" size="small">删除</Button>
           <!-- @click="remove(index)" -->
         </Poptip>
-        <Button type="primary" size="small" style="margin-right:.5rem;" @click="resettingPwd(row)" v-show="hideElement">重置</Button>
+        <Button v-show="isShow(row.id)" type="primary" size="small" style="margin-right:.5rem;"
+          @click="resettingPwd(row.id)">重置</Button>
 
-        <Button type="warning"  size="small" @click="editBus(row, index)">编辑</Button>
+        <Button type="warning" size="small" @click="editBus(row, index)">编辑</Button>
         <!-- 前面的小图标会居中挡住文字  设置一下样式就好了 style="text-align:left" -->
 
         <!-- <Button type="primary" size="small" style="margin-left;: 5px" @click="show(index)">重置密码</Button> -->
@@ -27,8 +29,8 @@
     <!-- <Page :total="dataCount" :page-size="pageSize" show-total show-elevator show-sizer :current="current"
           :page-size-opts="[10, 20, 50, 100, 500]" size="small" prev-text="上一页" next-text="下一页" @on-change="changepage"
           @on-page-size-change="changePageSize"></Page> -->
-    <Modal v-model="handleModal" :title="modalTitle" :footer-hide="true" :mask-closable="false"
-      width="680" @on-visible-change="handleReset('formValidate')">
+    <Modal v-model="handleModal" :title="modalTitle" :footer-hide="true" :mask-closable="false" width="680"
+      @on-visible-change="handleReset('formValidate')">
       <Form inline ref="formValidate" :model="formValidate" :label-width="100" :rules="ruleValidate">
         <row :gutter="24">
           <Col span="12">
@@ -90,7 +92,7 @@
 <script>
 import './user.less';
 
-import { updateById, getUserDataList, registerNewUser, deleteById,removePwd } from '@/api/user'
+import { updateById, getUserDataList, registerNewUser, deleteById, removePwd } from '@/api/user'
 import validator from 'validator'
 
 
@@ -99,23 +101,22 @@ export default {
   data() {
     return {
       companyName: "",
-      modalTitle:"",
-      hideElement:true,
+      modalTitle: "",
       // modal开始为false
       handleModal: false,
       //规则
       ruleValidate: {
-        name: [{ required: true, message: "名称不能为空！", trigger: ['blur','change'] }],
-        username: [{ required: true, message: "账号不能为空！", trigger: ['blur','change'] }],
+        name: [{ required: true, message: "名称不能为空！", trigger: ['blur', 'change'] }],
+        username: [{ required: true, message: "账号不能为空！", trigger: ['blur', 'change'] }],
         mobilePhone: [
-          { required: true,  trigger: ['blur','change'] },
+          { required: true, trigger: ['blur', 'change'] },
           {
             validator: (rule, value, callback) => {
-              if(validator.isMobilePhone(value, 'zh-CN')){
+              if (validator.isMobilePhone(value, 'zh-CN')) {
                 callback()
-            }else{
+              } else {
                 callback(new Error('手机号码格式不正确'))
-            }
+              }
             }
           }
         ],
@@ -145,8 +146,8 @@ export default {
         {
           title: "序号",
           type: "index",
-         // type: 'selection',
-        
+          // type: 'selection',
+
         },
         // {
         //   title: "id",
@@ -232,6 +233,16 @@ export default {
     // cancel() { },
     // // 查找按钮
     // search() {
+    isShow(id) {
+      debugger
+      var id1 = localStorage.getItem('userId')-0;
+      if (id === id1) {
+        return false;
+      } else {
+        return true;
+      }
+
+    },
 
 
     // },
@@ -268,7 +279,7 @@ export default {
             })
 
           } else {
-            params.id=null;
+            params.id = null;
             registerNewUser(params).then(res => {
               const data = res.data;
               if (data.code != 200) {
@@ -300,7 +311,7 @@ export default {
       //console.info(this.formValidate)
     },
     // 删除一条数据
-    remove(index,id) {
+    remove(index, id) {
       ////console.info(index)
       deleteById(id).then(res => {
         const data = res.data;
@@ -337,11 +348,12 @@ export default {
       });
     },
 
-    resettingPwd(id){
+    resettingPwd(id) {
       removePwd(id).then(res => {
+        debugger;
         const data = res.data;
-        if (data.code == 200) {
-          this.tableData.splice(index, 1);
+        if (res.status == 200) {
+
           // on-click  方法 冒泡提示确定
           this.$Message.success("密码重置成功");
         } else {
@@ -375,9 +387,9 @@ export default {
     },
     rowClassName(row, index) {
 
-return 'demo-table-info-row';
+      return 'demo-table-info-row';
 
-},
+    },
 
   },
 

@@ -184,7 +184,7 @@ export default {
                 { value: 310, name: '3轴27吨车型' },
                 { value: 234, name: '3轴25吨车型' },
                 { value: 135, name: '4轴31吨车型' },
-                { value: 156, name: ' 4轴36吨车型' },
+                { value: 156, name: '4轴36吨车型' },
                 { value: 89, name: '5轴42吨车型' },
                 { value: 254, name: '5轴43吨车型' },
                 { value: 1548, name: '6轴及以上' },
@@ -387,7 +387,7 @@ export default {
                 console.info(res)
                 this.lineData = res.data.data[0];
                 this.lineTitle = res.data.data[1];
-                //   this.initLineCharts();
+               // this.initLineCharts();
             }).catch(err => {
                 console.error(err)
             })
@@ -396,6 +396,8 @@ export default {
         getCarTypeCountCurrent() {
             getCarTypeCountCurrent().then(res => {
                 console.info(res)
+                this.pieData = res.data.data;
+               // this.initPieCharts();            
             }).catch(err => {
                 console.error(err)
             })

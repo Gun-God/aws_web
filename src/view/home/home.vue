@@ -16,7 +16,7 @@
             </div>
 
             <div class="down">
-                <div class="left box-div">
+                <div class="box-div">
                     <p class="title">行车道</p>
                     <div class="pdiv">
                         <div class="car-time car-div">{{ slowLane.createTime }}</div>
@@ -47,7 +47,7 @@
                                     轴数
                                 </p>
                             </div>
-                            <p class="msg">(长{{ slowLane.length }}米 宽{{ slowLane.width }}米 高{{ slowLane.height }}米)</p>
+                            <p class="msg">(长{{ slowLane.length ? slowLane.length : 0 }}米 宽{{ slowLane.width ? slowLane.width : 0 }}米 高{{ slowLane.height ? slowLane.height : 0 }}米)</p>
                         </div>
                     </div>
 
@@ -62,8 +62,7 @@
                     </div>
 
                 </div>
-
-                <div class="right box-div">
+                <div class="box-div">
                     <p class="title">超车道</p>
                     <div class="pdiv">
                         <div class="car-time car-div">{{ fastLane.createTime }}</div>
@@ -94,7 +93,7 @@
                                     轴数
                                 </p>
                             </div>
-                            <p class="msg">(长{{ fastLane.length }}米 宽{{ fastLane.width }}米 高{{ fastLane.height }}米)</p>
+                            <p class="msg">(长{{ slowLane.length ? slowLane.length : 0 }}米 宽{{ slowLane.width ? slowLane.width : 0 }}米 高{{ slowLane.height ? slowLane.height : 0 }}米)</p>
                         </div>
                     </div>
 
@@ -107,6 +106,52 @@
 
                     </div>
                 </div>
+                <!-- <div class="box-div">
+                    <p class="title">超车道</p>
+                    <div class="pdiv">
+                        <div class="car-time car-div">{{ fastLane.createTime }}</div>
+                        <div :class="getClass(1)">{{ fastLane.carNo }}</div>
+                        <div class="car-msg car-div">
+                            <div class="weight pmsg">
+                                <p>
+                                    {{ fastLane.weight }}T
+                                </p>
+                                <p>
+                                    重量
+                                </p>
+                            </div>
+                            <div class="amt pmsg">
+                                <p>
+                                    {{ fastLane.limitAmt }}T
+                                </p>
+                                <p>
+                                    限载
+                                </p>
+
+                            </div>
+                            <div class="axis pmsg">
+                                <p>
+                                    {{ fastLane.axisNum }}
+                                </p>
+                                <p>
+                                    轴数
+                                </p>
+                            </div>
+                            <p class="msg">(长{{ slowLane.length ? slowLane.length : 0 }}米 宽{{ slowLane.width ? slowLane.width : 0 }}米 高{{ slowLane.height ? slowLane.height : 0 }}米)</p>
+                        </div>
+                    </div>
+
+                     <div class="car-img">
+                        <img :src="car2" />
+
+                    </div>
+                    <div class="car-img">
+                        <img :src="car1" />
+
+                    </div>
+                </div> -->
+
+              
 
             </div>
 
@@ -188,7 +233,6 @@ export default {
         },
         getNowPreCheckData() {
             getNowPreCheckData().then(res => {
-                debugger
                 const data = res.data.data
                 this.fastLane = data[0]
                 this.slowLane = data[1]
@@ -211,7 +255,7 @@ export default {
                 else
                     return 'car-no car-div lan';
             }
-            else if(color === 2){
+            else if (color === 2) {
                 if (this.fastLane.color === 1)
                     return 'car-no car-div';
                 else
@@ -232,7 +276,7 @@ export default {
         this.getNowPreCheckData();
         this.laneTimer = setInterval(() => {
             this.getNowPreCheckData();
-        }, 30 * 1000)
+        }, 10 * 1000)
         // this.tableData = testData.histories;
         //this.listenResizeF();
         this.tableHeight = this.$refs.list.offsetHeight;

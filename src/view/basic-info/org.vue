@@ -25,8 +25,6 @@
         <!-- 前面的小图标会居中挡住文字  设置一下样式就好了 style="text-align:left" -->
 
         <!-- <Button type="primary" size="small" style="margin-left;: 5px" @click="show(index)">重置密码</Button> -->
-
-
       </template>
     </Table>
     <!-- <Page :total="dataCount" :page-size="pageSize" show-total show-elevator show-sizer :current="current"
@@ -139,7 +137,7 @@ export default {
         shortName: "",
         location: "",
         lane: "",
-        
+        type: "0",
 
       },
       // 初始化信息总条数
@@ -154,6 +152,7 @@ export default {
         {
           title: "序号",
           type: "index",
+          width:80,
          // type: 'selection',
         },
         // {
@@ -314,7 +313,7 @@ export default {
       this.modalTitle = "修改";
       this.itemIndex = index;
       this.formValidate = JSON.parse(JSON.stringify(item));
-      this.formValidate.type = this.formValidate.type + ""
+      this.formValidate.type = this.formValidate.type + "";
       //console.info(this.formValidate)
     },
     // 删除一条数据

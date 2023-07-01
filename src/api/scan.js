@@ -59,5 +59,13 @@ export const updateById = (params) => {
   })
 }
 
+export const selectAllCamera = () => {
+ 
+  return axios.request({
+    url: 'scan/selectAllCamera',
+    method: 'get'
+  })
+}
+
 
 

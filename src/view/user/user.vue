@@ -234,7 +234,6 @@ export default {
     // // 查找按钮
     // search() {
     isShow(id) {
-      debugger
       var id1 = localStorage.getItem('userId')-0;
       if (id === id1) {
         return false;
@@ -350,7 +349,6 @@ export default {
 
     resettingPwd(id) {
       removePwd(id).then(res => {
-        debugger;
         const data = res.data;
         if (res.status == 200) {
 

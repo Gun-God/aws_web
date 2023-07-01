@@ -98,7 +98,7 @@
 
         <p class="right-left-title">
             <Icon type="md-volume-up" size="24" />
-            超限车列表
+            预检车列表
         </p>
         <div class="down-content " ref="carList">
 
@@ -146,13 +146,14 @@ export default {
                     key: "carNo",
                     width: 150,
                 },
-                {
-                    title: "自重",
-                    key: "weight"
-                },
+            
                 {
                     title: "限重",
                     key: "limitAmt"
+                },
+                {
+                    title: "预检",
+                    key: "preAmt"
                 },
                 {
                     title: "轴数",
@@ -162,15 +163,12 @@ export default {
                     title: "车速",
                     key: "speed"
                 },
+                
                 {
-                    title: "车道",
-                    key: "lane"
-                },
-                // {
-                //     title: "时间",
-                //     key: "createTime",
-                //     width: 200,
-                // }
+                    title: "时间",
+                    key: "createTime",
+                    width: 200,
+                }
 
             ],
             tableData: [],
@@ -178,6 +176,7 @@ export default {
             tableWidth1: 0,
             orgObject: [],
             lisTimer: null,
+            lisTimer1: null,
             orgCode: localStorage.getItem("orgCode"),
             pieData: [
                 { value: 335, name: '2轴18吨车型' },
@@ -222,7 +221,8 @@ export default {
     },
     methods: {
         beforeDestroy() {
-            clearInterval(this.laneTimer);
+            clearInterval(this.lisTimer);
+            clearInterval(this.lisTimer1);
 
         },
         initPieCharts() {
@@ -387,7 +387,7 @@ export default {
                 console.info(res)
                 this.lineData = res.data.data[0];
                 this.lineTitle = res.data.data[1];
-               // this.initLineCharts();
+                this.initLineCharts();
             }).catch(err => {
                 console.error(err)
             })
@@ -397,7 +397,7 @@ export default {
             getCarTypeCountCurrent().then(res => {
                 console.info(res)
                 this.pieData = res.data.data;
-               // this.initPieCharts();            
+                this.initPieCharts();            
             }).catch(err => {
                 console.error(err)
             })
@@ -422,15 +422,12 @@ export default {
             this.getCarCountLast24H();
             this.getCarTypeCountCurrent();
             this.getPreList();
-        }, 3 * 60 * 1000)
+        }, 2 * 60 * 1000)
         //  this.tableData = testData.histories;
         //this.tableHeight1 = (window.innerHeight * 0.27);
         this.tableHeight1 = window.innerHeight - this.$refs.table.$el.offsetTop - 21;
         // this.tableWidth = (window.innerWidth * 0.31);
-        setTimeout(() => {
-            this.initPieCharts();
-            this.initLineCharts();
-        }, 500);
+       
     }
 };
 

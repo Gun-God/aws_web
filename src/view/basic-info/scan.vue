@@ -1,12 +1,8 @@
 <template>
   <div>
-
-
-    <!-- <label prop="name">&nbsp;姓名：&nbsp;</label> -->
-    <!-- <Input v-model="companyName" id="pp" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp; -->
-    <!-- <Button @click="search" type="primary" icon="ios-search">查询</Button>&nbsp;&nbsp; -->
     <Button type="primary" @click="addBus" icon="ios-add-circle-outline">新增</Button>
-    <Table border :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight" :row-class-name="rowClassName" class="lll">
+    <Table border :columns="columns1" :data="tableData" size="small" ref="table" highlight-row :height="tableHeight"
+      :row-class-name="rowClassName" class="lll">
       <template slot-scope="{ row }" slot="name">
         <strong>{{ row.name }}</strong>
       </template>
@@ -19,51 +15,59 @@
 
         <Button type="warning" size="small" @click="editBus(row, index)">编辑</Button>
         <!-- 前面的小图标会居中挡住文字  设置一下样式就好了 style="text-align:left" -->
-
         <!-- <Button type="primary" size="small" style="margin-left;: 5px" @click="show(index)">重置密码</Button> -->
-
-
       </template>
     </Table>
-    <!-- <Page :total="dataCount" :page-size="pageSize" show-total show-elevator show-sizer :current="current"
-          :page-size-opts="[10, 20, 50, 100, 500]" size="small" prev-text="上一页" next-text="下一页" @on-change="changepage"
-          @on-page-size-change="changePageSize"></Page> -->
     <Modal v-model="handleModal" :title="modalTitle" :footer-hide="true" :mask-closable="false" width="680"
       @on-visible-change="handleReset('formValidate')">
       <Form inline ref="formValidate" :model="formValidate" :label-width="100" :rules="ruleValidate">
         <row :gutter="24">
-          <Col span="13">
-          <FormItem label="编号" prop="code">
+          <Col span="10">
+          <FormItem label="编号：" prop="code">
             <Input v-model="formValidate.code" placeholder="请输入编号" :disabled="isDisable"></Input>
           </FormItem>
-          <FormItem label="设备唯一标识" prop="deviceId">
+          <FormItem label="设备标识：" prop="deviceId">
             <Input v-model="formValidate.deviceId" placeholder="请输入设备唯一标识"></Input>
           </FormItem>
-          <FormItem label="名称" prop="portName">
+          <FormItem label="名称/串口：" prop="portName">
             <Input v-model="formValidate.portName" placeholder="请输入名称"></Input>
           </FormItem>
-          <FormItem label="车道数" prop="lane">
-            <Input type="number" v-model="formValidate.lane" placeholder="请输入车道数"></Input>
+          <FormItem label="车道：" prop="lane">
+            <Input type="number" v-model="formValidate.lane" placeholder="请输入车道"></Input>
           </FormItem>
-
-          <!-- <FormItem label="密码" prop="password">
-            <Input v-model="formValidate.password" placeholder="密码默认为123456"></Input>
-          </FormItem> -->
-          </Col>
-          <Col span="11">
-          <FormItem label="端口" prop="port">
+          <FormItem label="设备IP：" prop="videoIp">
+            <Input v-model="formValidate.videoIp" placeholder="请输入设备IP"></Input>
+          </FormItem>
+          <FormItem label="端口：" prop="port">
             <Input v-model="formValidate.port" placeholder="请输入端口"></Input>
           </FormItem>
-          <FormItem label="UDP" prop="udpIp">
-            <Input v-model="formValidate.udpIp" placeholder="请输入UDP"></Input>
+          </Col>
+          <Col span="14">
+          <FormItem label="账号：" prop="userName">
+            <Input v-model="formValidate.userName" placeholder="请输入账号"></Input>
           </FormItem>
-          <FormItem label="视频IP" prop="videoIp">
-            <Input v-model="formValidate.videoIp" placeholder="请输入视频IP"></Input>
+          <FormItem label="密码：" prop="password">
+            <Input v-model="formValidate.password" placeholder="请输入密码"></Input>
           </FormItem>
-          <FormItem label="分类" prop="type">
-            <Input v-model="formValidate.type" placeholder="请输入分类"></Input>
+          <FormItem label="分类：" prop="type">
+            <RadioGroup v-model="formValidate.type">
+              <Radio label="1">精检称台</Radio>
+              <Radio label="2">预检称台</Radio>
+              <Radio label="3">摄像头</Radio>
+            </RadioGroup>
           </FormItem>
-
+          <FormItem label="厂家：" prop="factory">
+            <RadioGroup v-model="formValidate.factory">
+              <Radio label="0">其他</Radio>
+              <Radio label="1">宇视</Radio>
+              <Radio label="2">海康</Radio>
+            </RadioGroup>
+          </FormItem>
+          <FormItem label="关联设备：" prop="reCode">
+            <Select v-model="formValidate.reCode" style="width:200px">
+              <Option v-for="item in scanList" :value="item.code">{{ item.portName }}</Option>
+            </Select>
+          </FormItem>
           </Col>
         </row>
         <FormItem>
@@ -73,27 +77,10 @@
         </FormItem>
       </Form>
     </Modal>
-    <!-- 分页控件 -->
-    <!-- <div>
-      <Page :total="page.total" :current="page.index" :page-size="page.size" :page-size-opts="[10, 20, 50, 100, 500]"
-        size="small" prev-text="上一页" next-text="下一页" show-total show-elevator show-sizer @on-change="changeIndexPage"
-        @on-page-size-change="changePageSize"></Page>
-    </div> -->
-
-
-
-
-    <!-- <div class="page-info">
-      <div>
-        <Page :total="dataCount" :page-size="pageSize" show-total show-elevator show-sizer :current="current"
-          :page-size-opts="pageList" prev-text="上一页" next-text="下一页" @on-change="changepage"
-          @on-page-size-change="changePageSize"></Page>
-      </div>
-    </div> -->
   </div>
 </template>
 <script>
-import { getScanDataList, insertScan, updateById, deleteById } from '@/api/scan'
+import { getScanDataList, insertScan, updateById, deleteById, selectAllCamera } from '@/api/scan'
 import validator from 'validator'
 
 
@@ -102,12 +89,13 @@ export default {
   // props:['tableHeight'],
   data() {
     return {
-      tableHeight:0,
+      tableHeight: 0,
       modalTitle: "",
       hideElement: true,
       // modal开始为false
       handleModal: false,
       isDisable: true,
+      scanList:[],
       //规则
       formValidate: {
         name: "",
@@ -118,8 +106,9 @@ export default {
         port: "",
         udpIp: "",
         videoIp: "",
-        type: "",
-
+        type: "1",
+        factory: "0",
+        reCode: "",
       },
       ruleValidate: {
         name: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
@@ -129,18 +118,10 @@ export default {
         lane: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
         type: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
 
-        mobilePhone: [
-          { required: true, trigger: ['blur', 'change'] },
-          {
-            validator: (rule, value, callback) => {
-              if (validator.isMobilePhone(value, 'zh-CN')) {
-                callback()
-              } else {
-                callback(new Error('手机号码格式不正确'))
-              }
-            }
-          }
-        ],
+        videoIp: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
+        port: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
+
+
         //orgName: [{ required: true, message: "性别不能为空！", trigger: ['blur','change'] }]
       },
       //  这个对应form里面的数据不能少  名字不规范我就不改了
@@ -158,8 +139,9 @@ export default {
         {
           title: "序号",
           type: "index",
+          width: 80
           // type: 'selection',
-         
+
         },
         // {
         //   title: "id",
@@ -180,7 +162,7 @@ export default {
           key: "deviceId"
         },
         {
-          title: "名称",
+          title: "名称/串口",
           align: "center",
           key: "portName"
         },
@@ -190,25 +172,51 @@ export default {
           key: "lane"
         },
         {
-          title: "端口号",
-          align: "center",
-          key: "port"
-        },
-        {
-          title: "UDP地址",
-          align: "center",
-          key: "udpIp",
-          width: 220,
-        },
-        {
-          title: "视频IP",
+          title: "设备IP",
           align: "center",
           key: "videoIp"
         },
         {
+          title: "端口号",
+          align: "center",
+          key: "port"
+        },
+        // {
+        //   title: "UDP地址",
+        //   align: "center",
+        //   key: "udpIp",
+        //   width: 220,
+        // },
+      
+        {
           title: "分类",
           align: "center",
-          key: "type"
+          key: "type",
+          render: (h, params) => {
+            const data = params.row.type
+            //console.info(params)
+            if (data == 1)
+              return h('span', "精检称台");
+            else if (data == 2)
+              return h('span', "预检称台");
+            else if (data == 3)
+              return h('span', "摄像头");
+          }
+        },
+        {
+          title: "厂家",
+          align: "center",
+          key: "factory",
+          render: (h, params) => {
+            const data = params.row.factory
+            //console.info(params)
+            if (data == 0)
+              return h('span', "其他");
+            else if (data == 1)
+              return h('span', "宇视");
+            else if (data == 2)
+              return h('span', "海康");
+          }
         },
         {
           title: "状态",
@@ -237,12 +245,12 @@ export default {
           key: "orgName"
         },
 
-        {
-          title: "建成时间",
-          align: "center",
-          key: "createTime",
-          width: 200,
-        },
+        // {
+        //   title: "安装日期",
+        //   align: "center",
+        //   key: "createTime",
+        //   width: 200,
+        // },
         {
           title: "录入员",
           align: "center",
@@ -259,7 +267,7 @@ export default {
       // 这里需要设置原数据为空
       // 好像跟实例化一样  不然会出错的
       tableData: [],
-      
+
       pageList: [30, 50, 100, 500],
     };
   },
@@ -333,7 +341,9 @@ export default {
       this.modalTitle = "修改";
       this.itemIndex = index;
       this.formValidate = JSON.parse(JSON.stringify(item));
-      this.formValidate.type = this.formValidate.type + ""
+      this.formValidate.type = this.formValidate.type + "";
+      this.formValidate.factory = this.formValidate.factory + "";
+
       //console.info(this.formValidate)
     },
     // 删除一条数据
@@ -379,12 +389,23 @@ export default {
     handleListApproveHistory() {
       getScanDataList(this.current, this.pageSize).then(res => {
         const data = res.data.data;
+        console.info(data)
+
         this.tableData = data.list;
         this.dataCount = data.total;
       }).catch(err => {
         //console.info(err)
       })
 
+    },
+    selectAllCamera() {
+      selectAllCamera().then(res => {
+        this.scanList = res.data.data;
+      
+        console.info( this.scanList)
+      }).catch(err => {
+        //console.info(err)
+      })
     },
 
     changepage(index) {
@@ -398,9 +419,9 @@ export default {
     },
     rowClassName(row, index) {
 
-return 'demo-table-info-row';
+      return 'demo-table-info-row';
 
-},
+    },
 
   },
 
@@ -411,9 +432,10 @@ return 'demo-table-info-row';
   // },
   created() {
     this.handleListApproveHistory();
+    this.selectAllCamera();
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop -185
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 185
   },
   computed: {
     // colHidden: function () { //重点

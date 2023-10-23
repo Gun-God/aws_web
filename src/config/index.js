@@ -17,7 +17,7 @@ export default {
    * @description api请求基础路径
    */
    baseUrl:{
-    dev: 'http://10.176.165.171:8787/aws',//开发环境
+    dev: 'http://localhost:8787/aws',//开发环境
     // pro: 'http://localhost:8081/standard'//正式环境
   },
   /**

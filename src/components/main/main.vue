@@ -59,8 +59,14 @@
           </Content>
         </Layout>
       </Content>
+      <footer>
+      <CopyRight></CopyRight>
+    </footer>
     </Layout>
+  
+   
   </Layout>
+ 
 </template>
 <script>
 import SideMenu from './components/side-menu'
@@ -76,9 +82,11 @@ import { mapMutations, mapActions, mapGetters } from 'vuex'
 import { getNewTagList, routeEqual } from '@/libs/util'
 import routers from '@/router/routers'
 import minLogo from '@/assets/images/logo.png'
-import maxLogo from '@/assets/images/logo.jpg'
+// import maxLogo from '@/assets/images/logo.jpg'
 import './main.less'
 import { getLunar } from 'chinese-lunar-calendar'
+import CopyRight from './components/copy-right/copy-right.vue'
+
 export default {
   name: 'Main',
   components: {
@@ -90,13 +98,13 @@ export default {
     Fullscreen,
     ErrorStore,
     User,
-    ABackTop
+    ABackTop,
+    CopyRight
   },
   data() {
     return {
       collapsed: false,
       minLogo,
-      maxLogo,
       isFullscreen: false,
       nowTime: "2023年05月12日 13:10:00",
       nowDate: "戊戌年四月初三 星期五",

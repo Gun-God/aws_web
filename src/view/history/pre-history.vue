@@ -420,7 +420,7 @@ export default {
 
     },
     mounted() {
-        this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 10;
+        this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 260;
         this.tableWidth = (window.innerWidth * 0.65);
         this.handlePreListApproveHistory();
 

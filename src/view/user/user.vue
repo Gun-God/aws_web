@@ -106,8 +106,24 @@ export default {
       handleModal: false,
       //规则
       ruleValidate: {
-        name: [{ required: true, message: "名称不能为空！", trigger: ['blur', 'change'] }],
-        username: [{ required: true, message: "账号不能为空！", trigger: ['blur', 'change'] }],
+        name: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+            validator: (rule, value, callback) => {
+              if (value=='') {
+                callback(new Error('必填项！'))
+              } else {
+                callback()
+              }
+            }
+          }],
+        username: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+            validator: (rule, value, callback) => {
+              if (value=='') {
+                callback(new Error('必填项！'))
+              } else {
+                callback()
+              }
+            }
+          }],
         mobilePhone: [
           { required: true, trigger: ['blur', 'change'] },
           {
@@ -400,7 +416,7 @@ export default {
     this.handleListApproveHistory();
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 20
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 30
   },
   computed: {
     colHidden: function () { //重点

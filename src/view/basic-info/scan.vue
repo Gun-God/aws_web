@@ -68,6 +68,11 @@
               <Option v-for="item in scanList" :value="item.code">{{ item.portName }}</Option>
             </Select>
           </FormItem>
+          <FormItem label="检测站：" prop="orgCode">
+            <Select v-model="formValidate.orgCode" style="width:200px">
+              <Option v-for="item in orgList" :value="item.code">{{ item.name }}</Option>
+            </Select>
+          </FormItem>
           </Col>
         </row>
         <FormItem>
@@ -81,8 +86,7 @@
 </template>
 <script>
 import { getScanDataList, insertScan, updateById, deleteById, selectAllCamera } from '@/api/scan'
-import validator from 'validator'
-
+import { selectAllOrg } from '@/api/nspOrg'
 
 export default {
   name: 'scan_page',
@@ -95,33 +99,107 @@ export default {
       // modal开始为false
       handleModal: false,
       isDisable: true,
-      scanList:[],
-      //规则
+      scanList: [],
+      orgList: [],
+
       formValidate: {
-        name: "",
-        code: "",
-        portName: "",
-        deviceId: "",
-        lane: "",
-        port: "",
-        udpIp: "",
-        videoIp: "",
-        type: "1",
-        factory: "0",
-        reCode: "",
+        name: '',
+        code: '',
+        portName: '',
+        deviceId: '',
+        lane: '',
+        port: '',
+        udpIp: '',
+        videoIp: '',
+        type: '1',
+        factory: '0',
+        reCode: '',
+        orgCode: '',
       },
+      //规则
       ruleValidate: {
-        name: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
-        code: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
-        portName: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
-        deviceId: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
-        lane: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
-        type: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
+        name: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+          validator: (rule, value, callback) => {
+            if (value == '') {
+              callback(new Error('必填项！'))
+            } else {
+              callback()
+            }
+          }
+        }],
+        code: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+          validator: (rule, value, callback) => {
+            if (value == '') {
+              callback(new Error('必填项！'))
+            } else {
+              callback()
+            }
+          }
+        }],
+        portName: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+          validator: (rule, value, callback) => {
+            if (value == '') {
+              callback(new Error('必填项！'))
+            } else {
+              callback()
+            }
+          }
+        }],
+        deviceId: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+          validator: (rule, value, callback) => {
+            if (value == '') {
+              callback(new Error('必填项！'))
+            } else {
+              callback()
+            }
+          }
+        }],
+        lane: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+          validator: (rule, value, callback) => {
+            if (value == '') {
+              callback(new Error('必填项！'))
+            } else {
+              callback()
+            }
+          }
+        }],
+        type: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+          validator: (rule, value, callback) => {
+            if (value == '') {
+              callback(new Error('必填项！'))
+            } else {
+              callback()
+            }
+          }
+        }],
 
-        videoIp: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
-        port: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }],
-
-
+        videoIp: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+          validator: (rule, value, callback) => {
+            if (value == '') {
+              callback(new Error('必填项！'))
+            } else {
+              callback()
+            }
+          }
+        }],
+        port: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+          validator: (rule, value, callback) => {
+            if (value == '') {
+              callback(new Error('必填项！'))
+            } else {
+              callback()
+            }
+          }
+        }],
+        orgCode: [{ required: true, message: "必填项！", trigger: ['blur', 'change'] }, {
+          validator: (rule, value, callback) => {
+            if (value == '') {
+              callback(new Error('必填项！'))
+            } else {
+              callback()
+            }
+          }
+        }],
         //orgName: [{ required: true, message: "性别不能为空！", trigger: ['blur','change'] }]
       },
       //  这个对应form里面的数据不能少  名字不规范我就不改了
@@ -187,7 +265,7 @@ export default {
         //   key: "udpIp",
         //   width: 220,
         // },
-      
+
         {
           title: "分类",
           align: "center",
@@ -290,9 +368,10 @@ export default {
     handleSubmit(name) {
       var self = this;
       self.$refs[name].validate(valid => {
+        debugger
         if (valid) {
           var params = JSON.parse(JSON.stringify(self.formValidate));
-          //console.info(params)
+        //  console.info(params)
           if (self.modalTitle == "修改") {
             updateById(params).then(res => {
               const data = res.data;
@@ -370,9 +449,10 @@ export default {
     },
     // 清除文本框  重置
     handleReset(name) {
-
+      var code=this.formValidate.code
       //console.info(111)
       this.$refs[name].resetFields();
+      this.formValidate.code=code;
     },
     // 详情显示
     show(index) {
@@ -389,7 +469,7 @@ export default {
     handleListApproveHistory() {
       getScanDataList(this.current, this.pageSize).then(res => {
         const data = res.data.data;
-        console.info(data)
+     //   console.info(data)
 
         this.tableData = data.list;
         this.dataCount = data.total;
@@ -401,12 +481,18 @@ export default {
     selectAllCamera() {
       selectAllCamera().then(res => {
         this.scanList = res.data.data;
-      
-        console.info( this.scanList)
       }).catch(err => {
         //console.info(err)
       })
     },
+    selectAllOrg() {
+      selectAllOrg().then(res => {
+        this.orgList = res.data.data;
+      }).catch(err => {
+        //console.info(err)
+      })
+    },
+
 
     changepage(index) {
       this.current = index;
@@ -433,9 +519,10 @@ export default {
   created() {
     this.handleListApproveHistory();
     this.selectAllCamera();
+    this.selectAllOrg();
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 185
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 190
   },
   computed: {
     // colHidden: function () { //重点

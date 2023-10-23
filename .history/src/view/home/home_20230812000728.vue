@@ -184,7 +184,7 @@ export default {
         CountMsg,
 
     },
-    data() {//类似定义全局变量？？？
+    data() {
         return {
             car1,
             car2,

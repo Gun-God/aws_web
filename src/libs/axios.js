@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
-//import { Message } from 'view-design'
-import { Message } from 'iview'
+import { Message } from 'view-design'
+//import { Message } from 'iview'
 // import { Spin } from 'iview'
 import { setToken,getToken} from '@/libs/util'
 const addErrorLog = errorInfo => {

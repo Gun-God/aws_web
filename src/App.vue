@@ -220,5 +220,9 @@ label {
 
 }
 
+.ivu-btn>i, .ivu-btn>span{
+	line-height: 1.3rem;
+}
+
 
 </style>

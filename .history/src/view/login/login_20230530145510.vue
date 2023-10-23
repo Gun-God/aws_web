@@ -26,7 +26,7 @@ export default {
     ...mapActions([
       'handleLogin',
       // 'getUserInfo'
-    ]),//这一步也绑定了后端控制器中的login，不过是通过先映射到store文件夹（用于存储登录），然后再映射到login
+    ]),
     handleSubmit ({ userName, password }) {
       this.handleLogin({ userName, password }).then(res => {
           res=res.data;

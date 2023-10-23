@@ -4,8 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-import iView from 'iview'
-//import ViewUI from 'view-design'
+//import iView from 'iview'
+import ViewUI from 'view-design';
+
+// import style
+import 'view-design/dist/styles/iview.css';
 import i18n from '@/locale'
 import config from '@/config'
 import importDirective from '@/directive'
@@ -33,12 +36,13 @@ Object.keys(filters).forEach(k => {
 /* eslint-disable */
 // if (process.env.NODE_ENV !== 'production') require('@/mock')
 
-Vue.use(iView, {
+Vue.use(ViewUI, {
   i18n: (key, value) => i18n.t(key, value)
 })
 
-// Vue.use(ViewUI);
-
+// Vue.use(iView, {
+//   i18n: (key, value) => i18n.t(key, value)
+// })
 Vue.use(TreeTable)
 Vue.use(VOrgTree)
 /**

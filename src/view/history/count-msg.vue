@@ -146,7 +146,7 @@ export default {
                     key: "carNo",
                     width: 150,
                 },
-            
+
                 {
                     title: "限重",
                     key: "limitAmt"
@@ -163,7 +163,7 @@ export default {
                     title: "车速",
                     key: "speed"
                 },
-                
+
                 {
                     title: "时间",
                     key: "createTime",
@@ -362,7 +362,7 @@ export default {
         },
         getCarCountCurrent() {
             getCarCountCurrent().then(res => {
-                console.info(res)
+            //    console.info(res)
                 this.carCount = res.data.data;
 
             }).catch(err => {
@@ -372,7 +372,7 @@ export default {
         },
         getCarOverLoadCurrent() {
             getCarOverLoadCurrent().then(res => {
-                console.info(res)
+              //  console.info(res)
                 this.limitC = res.data.data[0];
                 this.limitCPer = res.data.data[1];
                 this.limitB = res.data.data[2];
@@ -384,7 +384,7 @@ export default {
         },
         getCarCountLast24H() {
             getCarCountLast24H().then(res => {
-                console.info(res)
+             //   console.info(res)
                 this.lineData = res.data.data[0];
                 this.lineTitle = res.data.data[1];
                 this.initLineCharts();
@@ -395,9 +395,9 @@ export default {
         },
         getCarTypeCountCurrent() {
             getCarTypeCountCurrent().then(res => {
-                console.info(res)
+              //  console.info(res)
                 this.pieData = res.data.data;
-                this.initPieCharts();            
+                this.initPieCharts();
             }).catch(err => {
                 console.error(err)
             })
@@ -427,8 +427,12 @@ export default {
         //this.tableHeight1 = (window.innerHeight * 0.27);
         this.tableHeight1 = window.innerHeight - this.$refs.table.$el.offsetTop - 21;
         // this.tableWidth = (window.innerWidth * 0.31);
-       
-    }
+
+    },
+    destroyed() {
+
+        this.beforeDestroy();
+    },
 };
 
 </script>

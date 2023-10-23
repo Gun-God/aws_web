@@ -121,7 +121,7 @@ const onWsClose = (event) => {
   writeToScreen('DISCONNECT');
   // e.code === 1000  表示正常关闭。 无论为何目的而创建, 该链接都已成功完成任务。
   // e.code !== 1000  表示非正常关闭。
-  console.info('onclose event: ', event)
+ // console.info('onclose event: ', event)
   if (event && event.code !== 1000) {
     writeToScreen('非正常关闭');
     errorCallback(event);

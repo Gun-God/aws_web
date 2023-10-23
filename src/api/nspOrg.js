@@ -67,5 +67,13 @@ export const updateById = (params) => {
   })
 }
 
+export const selectAllOrg= () => {
+
+  return axios.request({
+    url: 'org/selectAllOrg',
+    method: 'get'
+  })
+}
+
 
 

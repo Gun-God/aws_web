@@ -218,7 +218,7 @@ export default {
     this.getSettingsList();
   },
   mounted() {
-    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 20
+    this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 30
   }
 };
 </script>

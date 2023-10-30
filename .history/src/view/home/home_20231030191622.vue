@@ -100,11 +100,11 @@
                     </div>
 
                     <div class="car-img">
-                        <img :src="car3" />
+                        <img :src=imgPath+fastLane.img />
 
                     </div>
                     <div class="car-img">
-                        <img :src="car4" />
+                        <img :src=imgPath+fastLane.img />
 
                     </div>
                 </div>
@@ -184,8 +184,9 @@ export default {
         CountMsg,
 
     },
-    data() {
+    data() {//类似定义全局变量？？？
         return {
+            imgPath:'http://localhost:7777/img/',
             car1,
             car2,
             car3,
@@ -239,6 +240,7 @@ export default {
 
         },
         getNowPreCheckData() {
+             this.fastLane.img="川KW5201/20231025173554.jpg";
             getNowPreCheckData().then(res => {
                
                 const data = res.data.data
@@ -246,6 +248,7 @@ export default {
                 if (data.length!=0) {
                     this.fastLane = data[0]
                     this.slowLane = data[1]
+                   
                 }
 
             }).catch(err => {

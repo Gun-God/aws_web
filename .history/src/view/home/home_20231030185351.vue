@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="car-img">
-                        <img :src="car3" />
+                        <img :src="/img/" />
 
                     </div>
                     <div class="car-img">

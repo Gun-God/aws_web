@@ -52,13 +52,13 @@
                         </div>
                     </div>
 
-                    <!-- 这里还需要做个判读 img是否为空 -->
+
                     <div class="car-img">
-                        <img :src=imgPath+slowLane.img />
+                        <img :src="car1" />
 
                     </div>
                     <div class="car-img">
-                        <img :src=imgPath+slowLane.img />
+                        <img :src="car2" />
 
                     </div>
 
@@ -94,17 +94,17 @@
                                     轴数
                                 </p>
                             </div>
-                            <p class="msg">(长{{ fastLane.length ? fastLane.length : 0 }}米 宽{{ fastLane.width ?
-                                fastLane.width : 0 }}米 高{{ fastLane.height ? fastLane.height : 0 }}米)</p>
+                            <p class="msg">(长{{ slowLane.length ? slowLane.length : 0 }}米 宽{{ slowLane.width ?
+                                slowLane.width : 0 }}米 高{{ slowLane.height ? slowLane.height : 0 }}米)</p>
                         </div>
                     </div>
 
                     <div class="car-img">
-                        <img :src=imgPath+fastLane.img />
+                        <img :src="/img/川KW5201/20231025173554.jpg" />
 
                     </div>
                     <div class="car-img">
-                        <img :src=imgPath+fastLane.img />
+                        <img :src="car4" />
 
                     </div>
                 </div>
@@ -186,7 +186,6 @@ export default {
     },
     data() {//类似定义全局变量？？？
         return {
-            imgPath:'http://localhost:7777/img/',
             car1,
             car2,
             car3,
@@ -240,7 +239,6 @@ export default {
 
         },
         getNowPreCheckData() {
-             this.fastLane.img="川KW5201/20231025173554.jpg";
             getNowPreCheckData().then(res => {
                
                 const data = res.data.data
@@ -248,7 +246,6 @@ export default {
                 if (data.length!=0) {
                     this.fastLane = data[0]
                     this.slowLane = data[1]
-                   
                 }
 
             }).catch(err => {

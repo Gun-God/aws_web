@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <!-- 这里还需要做个判读 img是否为空 -->
+
                     <div class="car-img">
                         <img :src=imgPath+slowLane.img />
 

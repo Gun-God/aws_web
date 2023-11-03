@@ -251,13 +251,13 @@ export default {
                 console.info(data)
                 if (data.length!=0) {
                     that.fastLane = data[0]
-                    console.info(typeof(that.slowLane.img));
+                    console.info(typeof(that.fastLane.img));
                    
-                    if(typeof(that.fastLane.img)!='undefined')
-                       that.fastLaneImg=that.imgPath+this.fastLane.img;
+                    if(typeof(that.fastLane.img)!=undefined)
+                       that.fastLaneImg=that.imgUrl+this.fastLane.img;
                     that.slowLane = data[1]
-                    if(that.slowLane&&typeof(that.slowLane.img)!='undefined')
-                       that.slowLaneImg=that.imgPath+this.slowLane.img;
+                    if(typeof(that.slowLane.img)!=undefined)
+                       that.slowLaneImg=that.imgUrl+this.slowLane.img;
                    
                 }
 

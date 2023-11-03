@@ -54,11 +54,11 @@
 
                     <!-- 这里还需要做个判读 img是否为空 -->
                     <div class="car-img">
-                        <img :src=slowLaneImg  />
+                        <img :src=imgPath+slowLane.img />
 
                     </div>
                     <div class="car-img">
-                        <img :src=slowLaneImg />
+                        <img :src=imgPath+slowLane.img />
 
                     </div>
 
@@ -100,11 +100,11 @@
                     </div>
 
                     <div class="car-img">
-                        <img :src=fastLaneImg />
+                        <img :src=imgPath+fastLane.img />
 
                     </div>
                     <div class="car-img">
-                        <img :src=fastLaneImg />
+                        <img :src=imgPath+fastLane.img />
 
                     </div>
                 </div>
@@ -176,7 +176,6 @@ import car3 from '@/assets/images/car/882-1.jpg'
 import car4 from '@/assets/images/car/882-2.jpg'
 //import video from '@/assets/images/car/video.png'
 import video from '@/assets/images/car/3.png'
-import defaultImg from '@/assets/images/no_img.jpg'
 
 
 export default {
@@ -188,9 +187,6 @@ export default {
     data() {//类似定义全局变量？？？
         return {
             imgPath:'car_img/',
-            slowLaneImg:defaultImg,
-                        fastLaneImg:defaultImg,
-
             car1,
             car2,
             car3,
@@ -244,20 +240,14 @@ export default {
 
         },
         getNowPreCheckData() {
-          //   this.fastLane.img="川KW5201/20231025173554.jpg";
-          const that=this;
+             this.fastLane.img="川KW5201/20231025173554.jpg";
             getNowPreCheckData().then(res => {
+               
                 const data = res.data.data
                 console.info(data)
                 if (data.length!=0) {
-                    that.fastLane = data[0]
-                    console.info(typeof(that.slowLane.img));
-                   
-                    if(typeof(that.fastLane.img)!='undefined')
-                       that.fastLaneImg=that.imgPath+this.fastLane.img;
-                    that.slowLane = data[1]
-                    if(that.slowLane&&typeof(that.slowLane.img)!='undefined')
-                       that.slowLaneImg=that.imgPath+this.slowLane.img;
+                    this.fastLane = data[0]
+                    this.slowLane = data[1]
                    
                 }
 
@@ -302,7 +292,7 @@ export default {
         this.getNowPreCheckData();
         this.laneTimer = setInterval(() => {
             this.getNowPreCheckData();
-        }, 2 * 1000)
+        }, 10 * 1000)
         // this.tableData = testData.histories;
         //this.listenResizeF();
         this.tableHeight = this.$refs.list.offsetHeight;

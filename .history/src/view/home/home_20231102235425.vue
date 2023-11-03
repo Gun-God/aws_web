@@ -176,7 +176,7 @@ import car3 from '@/assets/images/car/882-1.jpg'
 import car4 from '@/assets/images/car/882-2.jpg'
 //import video from '@/assets/images/car/video.png'
 import video from '@/assets/images/car/3.png'
-import defaultImg from '@/assets/images/no_img.jpg'
+import defaultImg from '@/assets/images/no_img.png'
 
 
 export default {
@@ -244,20 +244,15 @@ export default {
 
         },
         getNowPreCheckData() {
-          //   this.fastLane.img="川KW5201/20231025173554.jpg";
-          const that=this;
+             this.fastLane.img="川KW5201/20231025173554.jpg";
             getNowPreCheckData().then(res => {
+               
                 const data = res.data.data
                 console.info(data)
                 if (data.length!=0) {
-                    that.fastLane = data[0]
-                    console.info(typeof(that.slowLane.img));
-                   
-                    if(typeof(that.fastLane.img)!='undefined')
-                       that.fastLaneImg=that.imgPath+this.fastLane.img;
-                    that.slowLane = data[1]
-                    if(that.slowLane&&typeof(that.slowLane.img)!='undefined')
-                       that.slowLaneImg=that.imgPath+this.slowLane.img;
+                    this.fastLane = data[0]
+                    if(typeof(this.fastLane.img)==undefined))
+                    this.slowLane = data[1]
                    
                 }
 

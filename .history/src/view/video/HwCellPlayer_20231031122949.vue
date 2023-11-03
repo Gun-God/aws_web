@@ -45,7 +45,40 @@ export default {
             flvPlayer: null,
             //
             wsObj: null,
-           
+            playerOptions: {
+                live: true,
+                autoplay: true, // 如果true，浏览器准备好时开始播放
+                muted: false, // 默认情况下将会消除任何音频
+                loop: false, // 是否视频一结束就重新开始
+                preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+                aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+                fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+                // controlBar: {
+                //     timeDivider: false,
+                //     durationDisplay: false,
+                //     remainingTimeDisplay: false,
+                //     currentTimeDisplay: false, // 当前时间
+                //     volumeControl: false, // 声音控制键
+                //     playToggle: false, // 暂停和播放键
+                //     progressControl: false, // 进度条
+                //     fullscreenToggle: true // 全屏按钮
+                // },
+                // techOrder: ['flash'], // 兼容顺序
+                // flash: {
+                //     hls: {
+                //         withCredentials: false
+                //     },
+                //     // swf: SWF_URL
+                // },
+                controls: true,
+                sources: [{
+                    // type: 'rtmp/flv',
+                    type: "application/x-mpegURL",
+
+                    src: 'http://208.65.20.237/mjpg/video.mjpg' // 视频地址-改变它的值播放的视频会改变
+                }],
+                notSupportedMessage: '此视频暂无法播放，请稍后再试' // 允许覆盖Video.js无法播放媒体源时显示的默认信息。
+            }
         }
     },
     methods: {
@@ -84,16 +117,14 @@ export default {
         playVideo() {
             //尝试连接websocket
             try {
-               console.info(this.deviceId)
-               // if (flvjs.isSupported()) {
+                if (flvjs.isSupported()) {
                     // 如果已经存在 flvPlayer 实例，先停止和销毁它
-                  //  console.info(this.deviceId)
                 // 
                 if (this.flvPlayer) {
                     this.flvPlayer.pause()
                     this.flvPlayer.unload()
                     this.flvPlayer.detachMediaElement()
-                    this.flvPlayer.destroy()//??????
+                    this.flvPlayer.destroy()
                     }
                               
                 // 
@@ -110,35 +141,36 @@ export default {
                             hasAudio: false,
                             // url: this.ipurl + websocketName,
                             url: 'ws://localhost:8787/aws/websocket/' + this.deviceId,
-                            enableStashBuffer: false,
+                            enableStashBuffer: true,
                         },
                         {
                             // 
                             cors:true,
-                        cdeferLoadAfterSourceOpen: false,
-                            // enableWorker:true,
+
+                            enableWorker:true,
                             autoCleanupSourceBuffer:true,
                             // 
                             // stashInitialSize: 128,
                             stashInitialSize:384
                         }
                     );
-                   
                     this.flvPlayer.on("error", (err) => {
-                        console.info("err", err);
+                        console.log("err", err);
                     });
                     flvjs.getFeatureList();
                     this.flvPlayer.attachMediaElement(document.getElementById("videoWin"));
-                    this.flvPlayer.load();
-                   
-                  
-                    this.flvPlayer.play();
+                    this.flvPlayer.load().catch((err)=>{
+                        console.log(err);
+                    });
+                    this.flvPlayer.play().catch((err)=>{
+                        console.log(err);
+                    });
                     return true;
 
                     //报错重连
                     this.flvPlayer.on(flvjs.Events.ERROR, (errType,errDetail) => {
-                        console.info("errType", errType);
-                        console.info("errDetail",errDetail);
+                        console.log("errType", errType);
+                        console.log("errDetail",errDetail);
                         if(this.flvPlayer.isLive)
                         {
                             this.destroyVideo();
@@ -146,26 +178,10 @@ export default {
                         }
                     }
                     );
- console.info(this.flvPlayer)
-                     let controller = this.flvPlayer._transmuxer._controller
-                    let wsLoader = controller._ioctl._loader
-                    var oldWsOnCompleteFunc = wsLoader._onComplete
-                    wsLoader._onComplete = function() {
-             if(!controller._remuxer) {
-             controller._remuxer = {
-      flushStashedSamples: function () {
-        _this.loadingVisiable = false
-        console.info("flushStashedSamples")
-      }
-    }
-  }
-  oldWsOnCompleteFunc()
-}
 
-              //  }
-                
+                }
             } catch (error) {
-                console.info("连接websocket异常", error);
+                console.log("连接websocket异常", error);
                 return false;
             }
 
@@ -183,18 +199,18 @@ export default {
             }
         }
         // open() {
-        //     console.info("socket连接成功")
+        //     console.log("socket连接成功")
         // },
         // error() {
-        //     console.info("连接错误")
+        //     console.log("连接错误")
         // },
         // getMessage(message) {
-        //     console.info("收到消息");
-        //     console.info(message);
+        //     console.log("收到消息");
+        //     console.log(message);
         // },
         // close() {
         //     this.socket.close();
-        //     console.info("连接关闭");
+        //     console.log("连接关闭");
         // },
         ,
         mouseOverOne() {
@@ -211,7 +227,7 @@ export default {
     },
     mounted() {
         // setTimeout(() => {
-           
+        //     this.init();
         // }, 500);
         this.playVideo();
         console.info("mounted")
@@ -220,11 +236,10 @@ export default {
     destroyed() {
 
         closeWebsocket(this.wsObj);
-        this.destroyVideo();
         console.info("销毁webscoket")
     },
     beforeDestroy() {
-        // this.destroyVideo();
+        this.destroyVideo();
     }
 }
 </script>

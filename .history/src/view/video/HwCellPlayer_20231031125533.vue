@@ -84,16 +84,14 @@ export default {
         playVideo() {
             //尝试连接websocket
             try {
-               console.info(this.deviceId)
-               // if (flvjs.isSupported()) {
+                if (flvjs.isSupported()) {
                     // 如果已经存在 flvPlayer 实例，先停止和销毁它
-                  //  console.info(this.deviceId)
                 // 
                 if (this.flvPlayer) {
                     this.flvPlayer.pause()
                     this.flvPlayer.unload()
                     this.flvPlayer.detachMediaElement()
-                    this.flvPlayer.destroy()//??????
+                    this.flvPlayer.destroy()
                     }
                               
                 // 
@@ -110,35 +108,36 @@ export default {
                             hasAudio: false,
                             // url: this.ipurl + websocketName,
                             url: 'ws://localhost:8787/aws/websocket/' + this.deviceId,
-                            enableStashBuffer: false,
+                            enableStashBuffer: true,
                         },
                         {
                             // 
                             cors:true,
-                        cdeferLoadAfterSourceOpen: false,
-                            // enableWorker:true,
+
+                            enableWorker:true,
                             autoCleanupSourceBuffer:true,
                             // 
                             // stashInitialSize: 128,
                             stashInitialSize:384
                         }
                     );
-                   
                     this.flvPlayer.on("error", (err) => {
-                        console.info("err", err);
+                        console.log("err", err);
                     });
                     flvjs.getFeatureList();
                     this.flvPlayer.attachMediaElement(document.getElementById("videoWin"));
-                    this.flvPlayer.load();
-                   
-                  
-                    this.flvPlayer.play();
+                    this.flvPlayer.load().catch((err)=>{
+                        console.log(err);
+                    });
+                    this.flvPlayer.play().catch((err)=>{
+                        console.log(err);
+                    });
                     return true;
 
                     //报错重连
                     this.flvPlayer.on(flvjs.Events.ERROR, (errType,errDetail) => {
-                        console.info("errType", errType);
-                        console.info("errDetail",errDetail);
+                        console.log("errType", errType);
+                        console.log("errDetail",errDetail);
                         if(this.flvPlayer.isLive)
                         {
                             this.destroyVideo();
@@ -146,26 +145,10 @@ export default {
                         }
                     }
                     );
- console.info(this.flvPlayer)
-                     let controller = this.flvPlayer._transmuxer._controller
-                    let wsLoader = controller._ioctl._loader
-                    var oldWsOnCompleteFunc = wsLoader._onComplete
-                    wsLoader._onComplete = function() {
-             if(!controller._remuxer) {
-             controller._remuxer = {
-      flushStashedSamples: function () {
-        _this.loadingVisiable = false
-        console.info("flushStashedSamples")
-      }
-    }
-  }
-  oldWsOnCompleteFunc()
-}
 
-              //  }
-                
+                }
             } catch (error) {
-                console.info("连接websocket异常", error);
+                console.log("连接websocket异常", error);
                 return false;
             }
 
@@ -183,18 +166,18 @@ export default {
             }
         }
         // open() {
-        //     console.info("socket连接成功")
+        //     console.log("socket连接成功")
         // },
         // error() {
-        //     console.info("连接错误")
+        //     console.log("连接错误")
         // },
         // getMessage(message) {
-        //     console.info("收到消息");
-        //     console.info(message);
+        //     console.log("收到消息");
+        //     console.log(message);
         // },
         // close() {
         //     this.socket.close();
-        //     console.info("连接关闭");
+        //     console.log("连接关闭");
         // },
         ,
         mouseOverOne() {
@@ -210,21 +193,20 @@ export default {
 
     },
     mounted() {
-        // setTimeout(() => {
-           
-        // }, 500);
-        this.playVideo();
+        setTimeout(() => {
+            this.playVideo();
+        }, 500);
+       
         console.info("mounted")
         // this.init();
     },
     destroyed() {
 
         closeWebsocket(this.wsObj);
-        this.destroyVideo();
         console.info("销毁webscoket")
     },
     beforeDestroy() {
-        // this.destroyVideo();
+        this.destroyVideo();
     }
 }
 </script>

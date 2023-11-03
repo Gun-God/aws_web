@@ -42,18 +42,3 @@ export const getCarTypeCountCurrent = () => {
     method: 'get'
   })
 }
-
-
-export const getPerCheckDataByQuery = (page, size,data) => {
-
-  let params={
-    page: page,
-    size: size,
-  }
-  params=Object.assign(params, data)
-  return axios.request({
-    url: 'preCheck/getPerCheckDataByQuery',
-    params:params,
-    method: 'get'
-  })
-}

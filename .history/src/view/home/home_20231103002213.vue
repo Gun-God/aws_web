@@ -256,7 +256,7 @@ export default {
                     if(typeof(that.fastLane.img)!='undefined')
                        that.fastLaneImg=that.imgPath+this.fastLane.img;
                     that.slowLane = data[1]
-                    if(that.slowLane&&typeof(that.slowLane.img)!='undefined')
+                    if(typeof(that.slowLane.img)!='undefined')
                        that.slowLaneImg=that.imgPath+this.slowLane.img;
                    
                 }

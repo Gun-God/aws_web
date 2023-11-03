@@ -224,7 +224,7 @@ export default {
                 startT: this.startT ? this.startT : null,
                 endT: this.endT ? this.endT : null,
             };
-            
+            console.log("111111111111");
             getCarNoDataList(this.current, this.pageSize, data).then(res => {
                 const data = res.data.data;
                 this.tableData2 = data.list;

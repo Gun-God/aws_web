@@ -423,7 +423,7 @@ export default {
             this.getCarTypeCountCurrent();
             this.getPreList();
         // }, 2 * 60 * 1000)
-         }, 1 * 5 * 1000)
+         }, 1 * 10 * 1000)
         //  this.tableData = testData.histories;
         //this.tableHeight1 = (window.innerHeight * 0.27);
         this.tableHeight1 = window.innerHeight - this.$refs.table.$el.offsetTop - 21;

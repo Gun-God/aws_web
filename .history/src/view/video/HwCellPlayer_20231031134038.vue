@@ -93,7 +93,7 @@ export default {
                     this.flvPlayer.pause()
                     this.flvPlayer.unload()
                     this.flvPlayer.detachMediaElement()
-                    this.flvPlayer.destroy()//??????
+                    this.flvPlayer.destroy()
                     }
                               
                 // 
@@ -224,7 +224,7 @@ export default {
         console.info("销毁webscoket")
     },
     beforeDestroy() {
-        // this.destroyVideo();
+        this.destroyVideo();
     }
 }
 </script>

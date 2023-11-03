@@ -405,8 +405,9 @@ export default {
                 const data = res.data.data;
                 this.tableData = data.list;
                 this.dataCount = data.total;
+            
             }).catch(err => {
-                console.info(err)
+                //console.info(err)
             })
             // var data1={carNo:"323",lane:2}
             // data=data+data1;
@@ -443,6 +444,7 @@ export default {
     mounted() {
         this.tablecolHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 260;
         this.tableWidth = (window.innerWidth * 0.65);
+        console.log(11111111111111111);
         this.handlePreListApproveHistory();
 
     },

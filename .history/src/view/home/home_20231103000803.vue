@@ -243,21 +243,20 @@ export default {
             })
 
         },
-        getNowPreCheckData() {
+       async getNowPreCheckData() {
           //   this.fastLane.img="川KW5201/20231025173554.jpg";
-          const that=this;
             getNowPreCheckData().then(res => {
                 const data = res.data.data
                 console.info(data)
                 if (data.length!=0) {
-                    that.fastLane = data[0]
-                    console.info(typeof(that.slowLane.img));
-                   
-                    if(typeof(that.fastLane.img)!='undefined')
-                       that.fastLaneImg=that.imgPath+this.fastLane.img;
-                    that.slowLane = data[1]
-                    if(that.slowLane&&typeof(that.slowLane.img)!='undefined')
-                       that.slowLaneImg=that.imgPath+this.slowLane.img;
+                    this.fastLane = data[0]
+                    console.info(typeof(this.fastLane.img));
+                    debugger
+                    if(typeof(this.fastLane.img)!='undefined')
+                       this.fastLaneImg=imgUrl+this.fastLane.img;
+                    this.slowLane = data[1]
+                    if(typeof(this.slowLane.img)!='undefined')
+                       this.slowLaneImg=imgUrl+this.slowLane.img;
                    
                 }
 

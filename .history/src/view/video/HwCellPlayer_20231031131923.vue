@@ -84,16 +84,15 @@ export default {
         playVideo() {
             //尝试连接websocket
             try {
-               console.info(this.deviceId)
-               // if (flvjs.isSupported()) {
+               
+                if (flvjs.isSupported()) {
                     // 如果已经存在 flvPlayer 实例，先停止和销毁它
-                  //  console.info(this.deviceId)
                 // 
                 if (this.flvPlayer) {
                     this.flvPlayer.pause()
                     this.flvPlayer.unload()
                     this.flvPlayer.detachMediaElement()
-                    this.flvPlayer.destroy()//??????
+                    this.flvPlayer.destroy()
                     }
                               
                 // 
@@ -129,10 +128,15 @@ export default {
                     });
                     flvjs.getFeatureList();
                     this.flvPlayer.attachMediaElement(document.getElementById("videoWin"));
-                    this.flvPlayer.load();
+                    this.flvPlayer.load().catch((err)=>{
+                        console.info(err);
+                    });
                    
+                    debugger
                   
-                    this.flvPlayer.play();
+                    this.flvPlayer.play().catch((err)=>{
+                        console.info(err);
+                    });
                     return true;
 
                     //报错重连
@@ -146,24 +150,8 @@ export default {
                         }
                     }
                     );
- console.info(this.flvPlayer)
-                     let controller = this.flvPlayer._transmuxer._controller
-                    let wsLoader = controller._ioctl._loader
-                    var oldWsOnCompleteFunc = wsLoader._onComplete
-                    wsLoader._onComplete = function() {
-             if(!controller._remuxer) {
-             controller._remuxer = {
-      flushStashedSamples: function () {
-        _this.loadingVisiable = false
-        console.info("flushStashedSamples")
-      }
-    }
-  }
-  oldWsOnCompleteFunc()
-}
 
-              //  }
-                
+                }
             } catch (error) {
                 console.info("连接websocket异常", error);
                 return false;
@@ -220,11 +208,10 @@ export default {
     destroyed() {
 
         closeWebsocket(this.wsObj);
-        this.destroyVideo();
         console.info("销毁webscoket")
     },
     beforeDestroy() {
-        // this.destroyVideo();
+        this.destroyVideo();
     }
 }
 </script>

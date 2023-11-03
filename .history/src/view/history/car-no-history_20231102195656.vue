@@ -229,6 +229,7 @@ export default {
                 const data = res.data.data;
                 this.tableData2 = data.list;
                 this.dataCount = data.total;
+                console.log(this.tableData2);
             }).catch(err => {
                 //console.info(err)
             })

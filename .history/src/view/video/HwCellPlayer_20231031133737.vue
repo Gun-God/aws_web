@@ -84,16 +84,16 @@ export default {
         playVideo() {
             //尝试连接websocket
             try {
-               console.info(this.deviceId)
-               // if (flvjs.isSupported()) {
+               
+                if (flvjs.isSupported()) {
                     // 如果已经存在 flvPlayer 实例，先停止和销毁它
-                  //  console.info(this.deviceId)
+                    console.info(this.deviceId)
                 // 
                 if (this.flvPlayer) {
                     this.flvPlayer.pause()
                     this.flvPlayer.unload()
                     this.flvPlayer.detachMediaElement()
-                    this.flvPlayer.destroy()//??????
+                    this.flvPlayer.destroy()
                     }
                               
                 // 
@@ -162,7 +162,7 @@ export default {
   oldWsOnCompleteFunc()
 }
 
-              //  }
+                }
                 
             } catch (error) {
                 console.info("连接websocket异常", error);
@@ -220,11 +220,10 @@ export default {
     destroyed() {
 
         closeWebsocket(this.wsObj);
-        this.destroyVideo();
         console.info("销毁webscoket")
     },
     beforeDestroy() {
-        // this.destroyVideo();
+        this.destroyVideo();
     }
 }
 </script>

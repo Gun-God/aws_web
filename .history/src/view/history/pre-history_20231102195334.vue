@@ -405,8 +405,9 @@ export default {
                 const data = res.data.data;
                 this.tableData = data.list;
                 this.dataCount = data.total;
+            
             }).catch(err => {
-                console.info(err)
+                //console.info(err)
             })
             // var data1={carNo:"323",lane:2}
             // data=data+data1;

@@ -18,7 +18,7 @@ export default {
    */
    baseUrl:{
     dev: 'http://localhost:8787/aws',//开发环境
-     pro: 'http://192.168.10.254:8787/aws'//正式环境
+     pro: 'http://localhost:8787/aws'//正式环境
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home

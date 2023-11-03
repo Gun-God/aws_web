@@ -84,7 +84,7 @@ export default {
         playVideo() {
             //尝试连接websocket
             try {
-               console.info(this.deviceId)
+               
                // if (flvjs.isSupported()) {
                     // 如果已经存在 flvPlayer 实例，先停止和销毁它
                   //  console.info(this.deviceId)
@@ -93,7 +93,7 @@ export default {
                     this.flvPlayer.pause()
                     this.flvPlayer.unload()
                     this.flvPlayer.detachMediaElement()
-                    this.flvPlayer.destroy()//??????
+                    this.flvPlayer.destroy()
                     }
                               
                 // 
@@ -224,7 +224,7 @@ export default {
         console.info("销毁webscoket")
     },
     beforeDestroy() {
-        // this.destroyVideo();
+        this.destroyVideo();
     }
 }
 </script>

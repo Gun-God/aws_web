@@ -384,21 +384,13 @@ export default {
             //     carNo:"323",
             //     lane:2
             // }
-            // var tableData_pre;
-            // var tableData_pre_history;
-            // var data_pre;
-            // var data_pre_history;
-            // var dataCount_pre;
-            // var dataCount_pre_history;
-            
-
-            // getPerCheckDataByQuery(this.current,this.pageSize,data).then(res=>{
-            //     const data = res.data.data;
-            //     this.tableData = data.list;
-            //     this.dataCount = data.total;
-            // }).catch(err => {
-            //     //console.info(err)
-            // })
+            getPerCheckDataByQuery(this.current,this.pageSize,data).then(res=>{
+                const data = res.data.data;
+                this.tableData = data.list;
+                this.dataCount = data.total;
+            }).catch(err => {
+                //console.info(err)
+            })
 
 
             getPreCheckDataHistoryList(this.current, this.pageSize, data).then(res => {
@@ -406,12 +398,9 @@ export default {
                 this.tableData = data.list;
                 this.dataCount = data.total;
             }).catch(err => {
-                console.info(err)
+                //console.info(err)
             })
-            // var data1={carNo:"323",lane:2}
-            // data=data+data1;
-            // console.log("here!");
-            // console.log(data);
+
         },
 
 

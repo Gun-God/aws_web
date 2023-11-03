@@ -405,6 +405,7 @@ export default {
                 const data = res.data.data;
                 this.tableData = data.list;
                 this.dataCount = data.total;
+            
             }).catch(err => {
                 console.info(err)
             })

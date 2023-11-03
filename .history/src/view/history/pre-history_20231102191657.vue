@@ -75,7 +75,7 @@
 import './pre-history.less';
 import CountMsg from './count-msg.vue';
 import { getPreCheckDataHistoryList } from '@/api/preCheckDataHistory';
-import { getPerCheckDataByQuery } from '@/api/preCheckData';
+import { getPreCheckDataHistoryList } from '@/api/preCheckData';
 // import { getCheckDataList } from '@/api/checkData'
 // import { getLedList } from '@/api/led'
 import checkHistory from './check-history.vue';
@@ -384,34 +384,14 @@ export default {
             //     carNo:"323",
             //     lane:2
             // }
-            // var tableData_pre;
-            // var tableData_pre_history;
-            // var data_pre;
-            // var data_pre_history;
-            // var dataCount_pre;
-            // var dataCount_pre_history;
-            
-
-            // getPerCheckDataByQuery(this.current,this.pageSize,data).then(res=>{
-            //     const data = res.data.data;
-            //     this.tableData = data.list;
-            //     this.dataCount = data.total;
-            // }).catch(err => {
-            //     //console.info(err)
-            // })
-
-
             getPreCheckDataHistoryList(this.current, this.pageSize, data).then(res => {
                 const data = res.data.data;
                 this.tableData = data.list;
                 this.dataCount = data.total;
             }).catch(err => {
-                console.info(err)
+                //console.info(err)
             })
-            // var data1={carNo:"323",lane:2}
-            // data=data+data1;
-            // console.log("here!");
-            // console.log(data);
+
         },
 
 

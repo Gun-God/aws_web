@@ -20,7 +20,7 @@
                     <p class="title">行车道</p>
                     <div class="pdiv">
                         <div class="car-time car-div">{{ slowLane.createTime }}</div>
-                        <div :class="getClass(this.slowLane.color)">{{ slowLane.carNo }}</div>
+                        <div :class="getClass(slowLane.color)">{{ slowLane.carNo }}</div>
                         <div class="car-msg car-div">
                             <div class="weight pmsg">
                                 <p>
@@ -67,7 +67,7 @@
                     <p class="title">超车道</p>
                     <div class="pdiv">
                         <div class="car-time car-div">{{ fastLane.createTime }}</div>
-                        <div :class="getClass(this.fastLane.color)">{{ fastLane.carNo }}</div>
+                        <div :class="getClass(fastLane.color)">{{ fastLane.carNo }}</div>
                         <div class="car-msg car-div">
                             <div class="weight pmsg">
                                 <p>
@@ -272,7 +272,7 @@ export default {
 
         },
         getClass(color) {
-              console.info("颜色",this.slowLane.color)
+              console.info(this.slowLane.color)
             // alert(color)
             if (color === 0) {
                 return 'car-no car-div lan';
@@ -287,7 +287,7 @@ export default {
                 // else
                     return 'car-no car-div';
             }
-            return 'car-no car-div';
+
         }
 
 

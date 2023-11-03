@@ -272,7 +272,7 @@ export default {
 
         },
         getClass(color) {
-              console.info("颜色",this.slowLane.color)
+              console.info(this.slowLane.color)
             // alert(color)
             if (color === 0) {
                 return 'car-no car-div lan';
@@ -287,7 +287,7 @@ export default {
                 // else
                     return 'car-no car-div';
             }
-            return 'car-no car-div';
+return 'car-no car-div lan';
         }
 
 

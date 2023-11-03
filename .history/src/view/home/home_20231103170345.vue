@@ -287,7 +287,7 @@ export default {
                 // else
                     return 'car-no car-div';
             }
-            return 'car-no car-div';
+            return 'car-no car-div lan';
         }
 
 

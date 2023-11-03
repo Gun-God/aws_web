@@ -281,12 +281,12 @@ export default {
                 // else
                 //     return 'car-no car-div lan';
             }
-            else if (color === 1) {
-                // if (this.fastLane.color === 1)
-                //     return 'car-no car-div';
-                // else
-                    return 'car-no car-div';
-            }
+            // else if (color === 1) {
+            //     // if (this.fastLane.color === 1)
+            //     //     return 'car-no car-div';
+            //     // else
+            //         return 'car-no car-div';
+            // }
             return 'car-no car-div';
         }
 

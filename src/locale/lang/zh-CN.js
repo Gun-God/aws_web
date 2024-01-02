@@ -2,6 +2,7 @@ export default {
   home: '首页',
   login: '登录',
   pre_page: '预检实时',
+  checkFrom_page:'精检数据',
   prehis_page: '历史数据',
   information_page: '信息管理',
   echarts_page: '报表管理',

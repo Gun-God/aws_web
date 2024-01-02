@@ -20,18 +20,20 @@
 
     .top {
         width: 100%;
-        height: 50%;
+        height: 38vh;
+        // height: 45%;
         // border: 1px solid rgb(205, 205, 211);
         //background-color: #28425b;
 
-        .video {
+        // .videoFrame {
+        .player {
 
             font-size: 4rem;
-
             text-align: center;
             float: left;
             width: 60%;
             height: 100%;
+
 
             // border: 1px solid rgb(205, 205, 211);
             img {
@@ -40,6 +42,319 @@
                 height: 100%;
                 //  object-fit:cover;
             }
+
+            // .player {
+            //     background-color: black;
+            //     width: 60%;
+            //     height: 100%;
+            //     border: 1px solid white;
+            //     color: white;
+            //     text-align: center;
+            //     // display: flex;             
+
+            // }
+
+            .video {
+                // margin-top: 0;
+                width: 100%;
+                height: 100%;
+
+            }
+
+        }
+
+        .inputform {
+            float: left;
+            width: 40%;
+            height: 100%;
+            display: flex;
+            // flex-wrap: wrap;
+
+            .ivu-card {
+                flex: auto !important;
+                // background-color: #001529;
+                background-image: linear-gradient(to bottom, #0f2539 60%, #113156);
+            }
+
+            card {
+                // width: 100%;
+                flex: auto;
+                margin-left: 10px;
+            }
+
+            .ivu-card-bordered {
+                border: 1px solid #494949;
+                border-color: #494949;
+            }
+
+            .ivu-card-head {
+                // background-color: #04274b !important;
+                background-image: linear-gradient(to left, #012140 0%, #22548d 50%, #012140 100%);
+                display: flex !important;
+                height: 10% !important;
+                // justify-content: center;
+                padding: 1px 40px;
+                justify-content: center;
+                align-items: center;
+                border-bottom:1px solid #3a3b3d;
+
+                a {
+                    font-size: 18px;
+                    color: white;
+                    display: flex;
+                    letter-spacing: 4px;
+                }
+            }
+
+            .ivu-card-body {
+                // display: flex;
+                display: flex;
+                flex-direction: column;
+                // justify-items: center;
+                // align-content: center;
+                align-items: center;
+                width: 100%;
+                height: 89%;
+
+                .inputFormBodyUp {
+                    display: flex;
+                    width: 100%;
+                    flex: 3;
+                    // align-items: center;
+                    // height: 100%;
+                    .inputFormBodyLeft {
+                        // width: 100%;
+
+                        flex-direction: column;
+                        // justify-items: center;
+                        // align-content: center;
+                        // align-items: center;
+                        display: flex;
+                        height: 100%;
+                        // width: 100%;
+                        flex: 1;
+
+                    }
+
+                    .inputFormBodyRight {
+                        flex: 1;
+                        // width: 100%;
+                        flex-direction: column;
+                        // justify-items: center;
+                        // align-content: center;
+                        align-items: center;
+                        height: 100%;
+                        // width: 100%;
+
+                    }
+                
+
+      
+
+                form{
+                    display: flex;
+                   flex-direction: column;
+                   justify-content:space-between;
+                    // justify-items: center;
+                    // align-items: center;
+                    // align-content: center;
+                    width: 98%;
+                    height: 100%;
+                    // height: 100%;
+                }
+
+
+
+                .ivu-form-item {
+                    flex: 1;
+                   display: flex;
+                    // width: 100%;
+                    // display: flex;
+                    //justify-items: space-between;
+                    // background-color: aqua;
+                    padding: 0px;
+                    margin-bottom: 0px;
+                    align-items: center;
+
+                    // flex-wrap: wrap;
+
+                }
+
+                .ivu-form-item-label {
+                    // justify-self: flex-start;
+                    font-size: 20px;
+                    flex: 3;
+                    padding: 0;
+                    // margin-right: 10px;
+                    // text-align: justify;
+                    text-align:end;
+                
+
+                }
+
+
+                .ivu-form-item-content {
+                    // justify-self: flex-end;
+                    flex: 4;
+                    display: flex;
+                    align-items: center;
+                    // justify-content: enter;
+
+                    .ivu-input {
+                       // font-size: 1.6rem;
+                       font-size: 20px; 
+                       letter-spacing: 1px;
+                        height: 4vh;
+                        width: 100%;
+                    }
+
+                    .ivu-btn {
+                        // font-size: large;
+                       // width: 20%;
+                        background-color: #fff;
+                        color: #001529;
+                        display: flex;
+                        padding: 25px 10px;
+                        justify-content: center;
+                        align-items: center;
+                        width: 5vw;
+
+                        span {
+                            // padding: 10px;
+                            // display: flex;
+                            // justify-content: center;
+
+                            font-size: 1.8rem;
+                            font-weight: bold;
+                        }
+
+                    }
+
+                    .ivu-select {
+                        display: flex;
+                        height: 100%;
+                        font-size: 20px;
+                    }
+
+                    .ivu-select-single .ivu-select-selection {
+                        background-color: #002c52;
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    .ivu-select-input {
+                        font-size: 20px;
+                        color: white;
+                        height: 4vh;
+                    }
+
+                    .ivu-select-item{
+                        font-size: 20px !important;
+
+                    }
+
+
+                }
+
+
+
+
+                }
+
+                .inputFormBodyBottom {
+                    width: 100%;
+                    flex: 1;
+                    form{
+                        display: flex;
+                    //    flex-direction: column;
+                        // justify-content: center;
+                        // align-items: center;
+                        // align-items: center;
+                        // align-content: center;
+                        width: 100%;
+                        height: 100%;
+                        // height: 100%;
+                    }
+
+                    .ivu-form-item {
+                        flex: 1;
+                       display: flex;
+                        // width: 100%;
+                        // display: flex;
+                        //justify-items: space-between;
+                        // background-color: aqua;
+                        padding: 0px;
+                        margin-bottom: 0px;
+                        align-items: center;
+                        justify-content: center;
+    
+                        // flex-wrap: wrap;
+    
+                    }
+                    .ivu-form-item-content {
+                        // justify-self: flex-end;
+                        // flex: 4;
+                        display: flex;
+                        align-items: center;
+                        // justify-content: center;
+
+                    .ivu-btn {
+                        // font-size: large;
+                        // width: 20%;
+                        // background-color: #fff;
+                        // color: #001529;
+                        color: #fff;
+                        display: flex;
+                        // padding: 25px 10px;
+                        justify-content: center;
+                        align-items: center;
+                        height: 3.5vh;
+                        width: 5vw;
+
+
+                        span {
+                            // padding: 10px;
+                            // display: flex;
+                            // justify-content: center;
+
+                            // font-size: 1.8rem;
+                            font-size: 20px;
+                            letter-spacing: 5px;
+                            font-weight: bold;
+                        }
+
+                    }
+
+                    .ivu-btn > .ivu-icon{
+                        font-size: 20px;
+                        line-height: 0px !important;
+                    }
+                }
+    
+
+                }
+
+                .carNo-select
+                {
+                    .ivu-select-item{
+                        width: 10vw !important;
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    .selectUp{
+
+                    }
+
+                    .selectDown{
+                        font-size: 18px;
+                        color: #bbb;
+
+                    }
+                }
+
+
+            }
         }
 
 
@@ -47,68 +362,117 @@
             float: left;
             width: 40%;
             height: 100%;
+            // overflow-y:hidden;
             // border: 1px solid rgb(205, 205, 211);
-
-
         }
 
-
-    }
-
-    .down {
-        width: 100%;
-        height: 50%;
-
-        // border: 1px solid rgb(205, 205, 211);
-        //background-color: #28425b;
-        .box-div {
-            float: left;
-            width: 50%;
+        .backImg {
+            // width: 40%;
             height: 100%;
+            justify-content: center;
+            display: flex;
 
-            // border: 1px solid rgb(205, 205, 211);
             .title {
                 color: #ffffff;
                 background-image: linear-gradient(to left, #012140 0%, #1e68bb 50%, #012140 100%);
                 border-radius: .2rem; // 边框圆角
                 text-align: center;
-                font-size: 1.3rem;
-                height: 3.5rem;
-                line-height: 3.5rem;
+                font-size: 1.6rem;
+                // height: 3.5rem;
+                height: 4vh;
+                line-height: 4vh;
+                letter-spacing: 0.3rem;
+                flex: 1;
                 // border: 1px solid rgb(205, 205, 211);
             }
 
             .pdiv {
-                margin-top: 1rem;
+                margin-top: 0.8rem;
                 width: 100%;
-                height: 6rem;
+                //height: 6rem;
+                flex: 7;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
                 // border: 1px solid rgb(205, 205, 211);
+
+                .pdiv-up {
+                    flex: 2;
+                    align-self: center;
+                    width: 100%;
+                    display: flex;
+                }
+
+                .pdiv-down {
+                    flex: 1;
+                    align-self: center;
+                    width: 100%;
+
+
+                }
+
                 .car-div {
                     text-align: center;
-                    float: left;
+                    //float: left;
                     height: 100%;
+                    width: 100%;
+
                     //   border: 1px solid rgb(205, 205, 211);
                 }
+
                 .car-time {
-                    font-size: 1.7rem;
-                    width: 22%;
+                    // font-size: 200px;
+                    width: 40%;
+                    flex: 3;
+                    display: flex;
+                    //    flex-direction: column;
+
+                    .car-time-innnerText {
+                        flex: 8;
+                        // justify-self: center;
+                        align-self: center;
+                        // font-size: 1vh;
+                    }
+
+                    .car-time-pad {
+                        flex: 1;
+                        // justify-self: center;
+                        // align-self:center;
+                    }
+
                 }
 
                 .car-no {
+                    flex: 4;
+                    display: flex;
+                    flex-direction: column;
                     color: white; // 字体颜色
                     background-color: #e5d332;
                     //background-color: #1e68bb; // 背景色
                     border-radius: .5rem; // 边框圆角
                     border: white .15rem solid; // 白色外边框
                     // padding: .02rem .8rem; // 内边距
-                    display: inline-block; // 视用在什么元素上而定
+                    //display: inline-block; // 视用在什么元素上而定
                     box-shadow: 0 0 .3rem .15rem #e5d332;
                     //box-shadow: 0 0 .3rem .15rem #1e68bb;
                     // 外阴影  前两个参数分别是上下和左右偏移  后两个属性依次为模糊距离和阴影尺寸  最后是颜色
-                    line-height: 5.6rem;
+                    // line-height: 5.6rem;
+
                     font-family: 'Arial, sans-serif';
-                    font-size: 2.5rem;
-                    width: 32%;
+                    font-size: 2.6rem;
+                    width: 60%;
+
+                    .car-no-innnerText {
+                        flex: 1;
+                        justify-self: center;
+                        // align-self:center;
+                    }
+
+                }
+
+                .pdiv-up-pad {
+                    flex: 1;
                 }
 
                 .lan {
@@ -117,30 +481,40 @@
                 }
 
                 .car-msg {
+                    margin-top: 1rem;
                     line-height: 5.5rem;
-                    width: 45%;
+                    width: 100%;
+                    display: flex;
+
 
                     div {
-                        float: left;
-                        width: 33%;
+                        //float: left;
+                        width: 100%;
                         height: 70%;
+                        flex: 1;
+                        justify-self: center;
                         //border: 1px solid rgb(205, 205, 211);
-
                     }
+
+
 
                     .msg {
-                        float: left;
+                        //float: left;
                         width: 100%;
                         height: 30%;
+
                         //border: 1px solid rgb(205, 205, 211);
                     }
 
+
+
+
                     p {
-                        font-size: 1.2rem;
+                        font-size: 1.4rem;
                         text-align: center;
                         // border: 1px solid rgb(205, 205, 211);
-                        line-height: 2rem;
-
+                        line-height: 1.7rem;
+                        // flex: 1;
                     }
 
                     // .weight{
@@ -153,23 +527,267 @@
             }
 
             .car-img {
-                margin-top: 2rem;
-                margin-left: 1.5rem;
-                float: left;
-                width: 45.5%;
+                flex: 15;
+                margin-top: 0.5rem;
+                // margin-left: 1.5rem;
+                //float: left;
+                // width: 100%;
                 //border: 1px solid rgb(110, 110, 110);
-                //height: 21rem;
-                height: 62%;
-                font-size: 4rem;
+                // height: 21rem;
+                // height: 10%;
+                // width: 30%;
+                // font-size: 4rem;
+                display: flex;
+                // justify-items: center;
+                text-align: center;
+                // width: 100%;
 
+
+                img {
+                    // display: block;
+
+                    //height: calc(100vh);
+                    flex: 7;
+                    // width: 68%;
+                    // height: 68%;
+                    // width: ;
+                    width: 16vw;
+                    height: 22vh;
+                    // width:300px;
+                    //height:190px;
+                    justify-self: center;
+                    display: flex;
+                    // margin-bottom: 0px;
+                    // object-fit: cover;
+                }
+
+                .car-img-pad {
+                    flex: 3;
+                }
+
+            }
+        }
+
+
+    }
+
+    .down {
+        width: 100%;
+        // height: 52%;
+        height: 50vh;
+        justify-content: center;
+        display: flex;
+
+        // margin-bottom: 100px;
+        // border: 1px solid rgb(205, 205, 211);
+        //background-color: #28425b;
+
+
+
+        .box-div {
+            // float: left;
+            // width: 30%;
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            // border: 1px solid rgb(205, 205, 211);
+            .title {
+                color: #ffffff;
+                background-image: linear-gradient(to left, #012140 0%, #1e68bb 50%, #012140 100%);
+                border-radius: .2rem; // 边框圆角
+                text-align: center;
+                font-size: 1.5rem;
+                // font-size: 4vh;
+                // height: 3.5rem;
+                height: 4vh;
+                line-height: 4vh;
+                letter-spacing: 0.3rem;
+                flex: 1;
+                // border: 1px solid rgb(205, 205, 211);
+            }
+
+            .pdiv {
+                margin-top: 1rem;
+                width: 100%;
+                //height: 6rem;
+                flex: 7;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                // border: 1px solid rgb(205, 205, 211);
+
+                .pdiv-up {
+                    flex: 2;
+                    align-self: center;
+                    width: 100%;
+                    display: flex;
+                }
+
+                .pdiv-down {
+                    flex: 1;
+                    align-self: center;
+                    width: 100%;
+
+
+                }
+
+                .car-div {
+                    text-align: center;
+                    //float: left;
+                    height: 100%;
+                    width: 100%;
+
+                    //   border: 1px solid rgb(205, 205, 211);
+                }
+
+                .car-time {
+                    font-size: 1.4rem;
+                    width: 40%;
+                    flex: 3;
+                    display: flex;
+                    //    flex-direction: column;
+
+                    .car-time-innnerText {
+                        flex: 8;
+                        // justify-self: center;
+                        align-self: center;
+                        // font-size: 2vh;
+                        font-size: 1vw;
+                    }
+
+                    .car-time-pad {
+                        flex: 1;
+                        // justify-self: center;
+                        // align-self:center;
+                    }
+
+                }
+
+                .car-no {
+                    flex: 5;
+                    display: flex;
+                    flex-direction: column;
+                    color: white; // 字体颜色
+                    background-color: #e5d332;
+                    //background-color: #1e68bb; // 背景色
+                    border-radius: .5rem; // 边框圆角
+                    border: white .15rem solid; // 白色外边框
+                    // padding: .02rem .8rem; // 内边距
+                    //display: inline-block; // 视用在什么元素上而定
+                    box-shadow: 0 0 .3rem .15rem #e5d332;
+                    //box-shadow: 0 0 .3rem .15rem #1e68bb;
+                    // 外阴影  前两个参数分别是上下和左右偏移  后两个属性依次为模糊距离和阴影尺寸  最后是颜色
+                    // line-height: 5.6rem;
+
+                    font-family: 'Arial, sans-serif';
+                    // font-size: clamp(1.9rem, 1.75rem + 0.2vw, 2rem);
+                    // font-size: 3.7vh;
+                    font-size: 1.8vw;
+                    // font-size:clamp(1.2rem, 0.3rem + 1.35vw, 3rem);
+                    height: 7vh;
+                    width: 80%;
+
+                    .car-no-innnerText {
+                        flex: 1;
+                        justify-self: center;
+                        // align-self:center;
+                    }
+
+                }
+
+                .pdiv-up-pad {
+                    flex: 1;
+                }
+
+                .lan {
+                    background-color: #1e68bb;
+                    box-shadow: 0 0 .3rem .15rem #1e68bb;
+                }
+
+                .car-msg {
+                    margin-top: 1rem;
+                    line-height: 5.5rem;
+                    width: 100%;
+                    display: flex;
+
+
+                    div {
+                        //float: left;
+                        width: 100%;
+                        height: 70%;
+                        flex: 1;
+                        justify-self: center;
+                        //border: 1px solid rgb(205, 205, 211);
+                    }
+
+
+
+                    .msg {
+                        //float: left;
+                        width: 100%;
+                        height: 30%;
+
+                        //border: 1px solid rgb(205, 205, 211);
+                    }
+
+
+
+
+                    p {
+                        font-size: 2.5vh;
+                        // font-size:(1.8rem,40px);
+                        text-align: center;
+                        // border: 1px solid rgb(205, 205, 211);
+                        line-height: 3vh;
+                        // flex: 1;
+                    }
+
+                    // .weight{
+
+
+
+                    // }
+
+                }
+            }
+
+            .car-img {
+                flex: 15;
+                margin-top: 1rem;
+                // margin-left: 1.5rem;
+                //float: left;
+                // width: 100%;
+                //border: 1px solid rgb(110, 110, 110);
+                // height: 21rem;
+                // height: 10%;
+                // width: 30%;
+                // font-size: 4rem;
+                display: flex;
+                // justify-items: center;
                 text-align: center;
 
                 img {
-                    display: block;
+                    // display: block;
+
                     //height: calc(100vh);
-                    width: 100%;
-                    height: 100%;
+                    flex: 7;
+                    // width: 70%;
+                    // height: 70%;
+                    width: 18vw;
+                    height: 27vh;
+                    // width:500px;
+                    //height:350px;
+                    justify-self: center;
+                    display: flex;
+                    // margin-bottom: 0px;
                     // object-fit: cover;
+                }
+
+                .car-img-pad {
+                    flex: 3;
                 }
 
             }
@@ -182,4 +800,13 @@
 
         // .right {}
     }
+
+    //单元格
+    .ivu-table table td {
+        background-image: linear-gradient(to bottom, #0f2539 85%, #1d3e63);
+        border-color: rgb(71, 71, 71) !important;
+
+    }
+
+
 }

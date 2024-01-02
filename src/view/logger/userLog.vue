@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div class="userLog-div">
         <!-- <label prop="name">&nbsp;姓名：&nbsp;</label>
       <Input v-model="companyName" id="pp" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
       <Button @click="search" type="primary" icon="ios-search">查询</Button>&nbsp;&nbsp; -->
@@ -35,13 +35,12 @@
 import Cookies from 'js-cookie';
 
 import { getUserLogList } from '@/api/user'
-
+import './userLog.less'
 
 export default {
     name: 'user_logger_page',
     data() {
         return {
-
 
             // 设置table的表头
             columns1: [
@@ -55,11 +54,8 @@ export default {
                     align: "type",
                     render: (h, params) => {
                         const data = params.row.type
-                        //console.info(data)
-                        if (data === 0)
-                            return h('span', "登录日志")
-                        else
-                            return h('span', '操作日志');
+                        // console.info(data)
+                        if (data === 0) { return h('span', "登录日志") } else { return h('span', '操作日志'); }
                     }
                 },
                 {
@@ -85,7 +81,7 @@ export default {
             // 初始化信息总条数
             dataCount: 0,
 
-            //当前页数
+            // 当前页数
             current: 1,
 
             // 每页显示多少条
@@ -98,14 +94,11 @@ export default {
     methods: {
         getUserLogList() {
             getUserLogList(this.current, this.pageSize).then(res => {
-
                 this.tableData = res.data.data.list;
                 this.dataCount = res.data.data.total;
-
             }).catch(err => {
-                //console.info(err)
+                // console.info(err)
             })
-
         },
 
         changepage(index) {
@@ -113,16 +106,13 @@ export default {
             this.getUserLogList();
         },
         changePageSize(size) {
-            //console.info(size);
+            // console.info(size);
             this.pageSize = size;
             this.getUserLogList();
         },
         rowClassName(row, index) {
-
             return 'demo-table-info-row';
-
         },
-
 
     },
 

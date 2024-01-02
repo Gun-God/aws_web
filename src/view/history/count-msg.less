@@ -3,6 +3,7 @@
     padding: .5rem;
     float: right;
     height: 99.8%;
+    // height: 99.8vh;
     // width: 49rem;
     width: 32.2%;
     text-align: center;
@@ -67,136 +68,293 @@
     //        color: #e0e6e9!important;
     //    }
 
+    .warningColorYellow{
+        color: #e5d332;
+    }
 
-    .top-content {
-        background-image: linear-gradient(to bottom, #0f2539 60%,#295587 );
-
-        // float: right;
-        width: 100%;
-        height: 46%;
-        padding-left: .5rem;
-        padding-top: .5rem;
-        border: 1px solid rgb(71, 71, 71);
-
+    .warningColorRed{
+        color: #ed4014;
     }
 
     .center-content {
         width: 100%;
-        height: 18%;
+        // height: 22%;
+        height:20vh;
         margin-top: .5rem;
+        padding-left: .5rem;
+        padding-top: 5px;
+        border: 1px solid rgb(71, 71, 71);
+        background-image: linear-gradient(to bottom, #0f2539 60%, #295587);
+        display: flex;
+        flex-direction: column;
+
+        .org-content{
+            display: flex;
+            flex: 7;
+            flex-direction: column;
+            // height: 100%;
+            // background-color: #06ddcb;
+            .org-title{
+                flex: 1;
+                // font-size: 1.5rem;
+                font-size: 2.3vh;
+                letter-spacing: 2px;
+                // margin-bottom: 10px;
+            }
+
+            .org-title-pad{
+                flex: 1;
+            }
+        
+        
+            .car-lables{
+                // flex: 5;
+                // float: left;
+                display: flex;
+                flex: 7;
+                // padding-top: 20px;
+        
+               }
+        
+            .left-lable {
+                flex: 2;
+                text-align: left;
+                // float: left;
+                margin-left: 2%;
+                display: flex;
+                flex-direction: column;
+                
+                // border: 1px solid rgb(205, 205, 211);
+                p {
+                    //  border: 1px solid rgb(205, 205, 211);
+                    // margin-top: 1rem;
+                    flex: 1;
+                    font-size: 2.1vh;
+                }
+            }
+        
+            .right-lable {
+                flex: 1;
+                text-align: left;
+                // float: right;
+                // margin-right: 1%;
+                display: flex;
+                flex-direction: column;
+                // width: 25%;
+                //border: 1px solid rgb(205, 205, 211);
+                p {
+                    //  border: 1px solid rgb(205, 205, 211);
+                    // margin-top: 1rem;
+                    flex: 1;
+                    font-size: 2.1vh;
+
+                }
+            }
+        
+        
+        
+            .car-lables-pad{
+                flex: 1;
+            }
+        
+
+        }
+        .header-select {
+            display: flex;
+            flex: 1;
+            margin-left: 3%;
+            // font-size: 1.4rem;
+            color: #e1e5ed;
+    
+            a {
+                color: #FFF;
+                // font-size: 24px;
+                font-size: 2.2vh;
+            }
+    
+    
+              .ivu-dropdown .ivu-select-dropdown {
+                // background-color: #0f2539;
+                background-color: rgba(15,37,57,1);
+                transition: background 0.2s ease-in-out;
+    
+                // &:hover{
+                //     background: rgba(246, 33, 33, 1);
+                //   }
+            }
+    
+            .ivu-dropdown-menu :hover{
+               background-color: rgb(80, 86, 92);;
+            }
+    
+            
+            
+            //   & * {
+            //     color: #515a6e;
+            //   }
+    
+        }
+    }
+
+
+   
+
+    .checkList-content {
+        background-image: linear-gradient(to bottom, #0f2539 60%, #295587);
+
+        // float: right;
+        width: 100%;
+        // height: 40%;
+        height: 38vh;
+ 
+        // margin-top: 1%;
+        border: 1px solid rgb(71, 71, 71);
+
+    }
+
+    .ivu-table th, .ivu-table td{
+        text-align: center;
+    }
+
+    .ivu-table-cell{
+        padding-left:0;
+        padding-right: 0;
+    }
+      
+    
+    .top-content {
+        background-image: linear-gradient(to bottom, #0f2539 60%, #295587);
+
+        // float: right;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        // height: 42%;
+        height: 38vh;
         padding-left: .5rem;
         padding-top: .5rem;
         border: 1px solid rgb(71, 71, 71);
-        background-image: linear-gradient(to bottom, #0f2539 60%,#295587 );
 
     }
+
 
     .down-content {
         margin-top: 1%;
         width: 100%;
-        height: 35.8%;
-
+        // height: 35.8%;
+        // height: 10vh;
         // padding-left: .5rem;
         // padding-top: .5rem;
         // border: 1px solid rgb(205, 205, 211);
     }
 
+    .car-statis-up{
+        flex: 1;
+        p{
+            font-size: 2.5vh;
+        }
+
+    }
+
+    .car-statis-mid{
+        flex: 4;
+        width: 100%;
+        height: 50%;
+        display: flex;
+        
+    }
+
+    // .car-statis-bottom{
+    //     // flex: 4;
+    //     width: 100%;
+    //     height: 100%;
+    // }
+
+
     .pieChart {
-        float: right;
-        width: 50%;
-        height: 45%;
+        flex: 5;
+        margin-left: 10px;
+        // float: right;
+        width: 100%;
+        height: 100%;
     }
 
     .lineChart {
-        float: right;
+        // float: right;
+        flex: 5;
         width: 100%;
-        height: 40%;
+        height: 100%;
     }
 
-    //    .car-lables label{
-    //     float: left;
-    //     padding-top: 20px;
-
-    //    }
-    .left-lable {
-        text-align: left;
-        float: left;
-        margin-left: 2%;
-
-        // border: 1px solid rgb(205, 205, 211);
-        p {
-            //  border: 1px solid rgb(205, 205, 211);
-            margin-top: 1rem;
-        }
-    }
-
-    .right-lable {
-        text-align: left;
-        float: right;
-        margin-right: 3%;
-
-        // width: 25%;
-        //border: 1px solid rgb(205, 205, 211);
-        p {
-            //  border: 1px solid rgb(205, 205, 211);
-            margin-top: 1rem;
-        }
-    }
-
+  
 
 
 
     .car-count {
+        flex: 4;
+        // float: left;
+        width: 100%;
+        // height: 100%;
+        display: flex;
+        flex-direction: column;
+        
 
-        float: left;
-        width: 48%;
-        height: 50%;
         // border: 1px solid rgb(205, 205, 211);
 
 
 
-       
+
 
         .car-liu {
             //opacity: 0.9;
-            
-            margin-top: .5rem;
+
+            // margin-top: .5rem;
             //border: 1px solid sandybrown;
             text-align: left;
-            height: 26%;
-            width: 70%;
+            height: auto;
+            width: 13.2vw;
+            // width: 60%;
+            // width: 100%;
             border-radius: 8px;
             padding-left: .2rem;
             background-image: linear-gradient(to bottom, #082c2c 24%, #16ddcc);
-
+            
             box-shadow: 0 0 .3rem .1rem #06ddcb;
 
 
             .cars {
                 position: relative;
                 top: -9%;
-                font-size: 1.3rem;
+                // font-size: 1.3rem;
+                font-size: 2vh;
             }
 
             .car-num {
                 font-family: 'DS-DIGIT';
-                font-size: 2.8rem;
+                // font-size: 2.8rem;
+                font-size: 4.5vh;
             }
+        }
+
+        .car-msg-content{
+            display: flex;
         }
 
         .content-span {
 
             .dg-title {
-                margin-top: .8rem;
+                // margin-top: 10px;
                 font-weight: bold;
                 color: #06ddcb;
+                font-size:2.5vh;
                 font-family: 'DS-DIGIT';
             }
 
             .dg-msg {
-                margin-top: .8rem;
+                // margin-top: 10px;
                 font-family: 'DS-DIGIT';
-                font-size: 1.5rem;
+                // font-size: 1.5rem;
+                font-size:2.5vh;
 
 
             }
@@ -209,7 +367,7 @@
 
     .left-span {
         text-align: left;
-        float: left;
+        // float: left;
         margin-left: 2%;
 
     }
@@ -217,12 +375,17 @@
     .right-span {
 
         text-align: left;
-        float: right;
+        // float: right;
         margin-left: 2%;
 
     }
 
+        //单元格
+.ivu-table table td {
+    background-image: linear-gradient(to bottom, #0f2539 85%,#1d3e63 );
+	border-color: rgb(71, 71, 71) !important;
 
+}
 
 
 

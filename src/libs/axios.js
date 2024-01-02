@@ -26,7 +26,8 @@ class HttpRequest {
       headers: {
         //
         'Content-Type': 'application/json',
-        'Authorization': getToken()
+        'Authorization': getToken(),
+        'OrgCode':localStorage.getItem('orgCode')
       }
     }
     return config
@@ -53,6 +54,33 @@ class HttpRequest {
     })
     // 响应拦截
     instance.interceptors.response.use(res => {
+      //
+      // res.data.data?.iShow ?? localStorage.setItem('iShow',res.data.data?.iShow);
+      // debugger
+     // console.info(res.data)
+      
+      if(res.data.data && res.data.data.ishow!=undefined )
+      {
+         localStorage.setItem('iShow',res.data.data.ishow);
+        //localStorage.setItem('iShow',true);
+        //这是登陆的时候肯定会有isshow 也就赋值name是用户名
+        if(res.data.data && res.data.data.name!=undefined )
+        {
+           localStorage.setItem('name',res.data.data.name);
+          //localStorage.setItem('iShow',true);
+        }
+      }
+
+     
+      
+      if(res.data.data && res.data.data.ishowSuperRole!=undefined )
+      {
+         localStorage.setItem('iShowSuperRole',res.data.data.ishowSuperRole);
+        //localStorage.setItem('iShow',true);
+      }
+
+      // localStorage.setItem('iShow',true);
+
       if (res.data.code == 5000 && res.data.msg != "账号或密码错误") {
         Message.error('登录状态已过期');
 

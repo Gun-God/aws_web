@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="set-table-div">
     <!-- <label prop="name">&nbsp;姓名：&nbsp;</label>
     <Input v-model="companyName" id="pp" style="width: 120px" placeholder="请输入" />&nbsp;&nbsp;
     <Button @click="search" type="primary" icon="ios-search">查询</Button>&nbsp;&nbsp; -->
@@ -57,9 +57,8 @@
 <script>
 
 import Cookies from 'js-cookie';
-
+import './table.less'
 import { getSettingsList, updateById } from '@/api/systemSetting'
-
 
 export default {
   name: 'static_table_page',
@@ -68,7 +67,7 @@ export default {
       companyName: "",
       // modal开始为false
       handleModal: false,
-      //规则
+      // 规则
       ruleValidate: {
         attributeName: [{ required: true, type: 'string', message: "描述不能为空！", trigger: ['blur', 'change'] }],
         msg: [{ required: true, message: "参数不能为空！", trigger: ['blur', 'change'] }],
@@ -79,7 +78,6 @@ export default {
         attributeName: "",
         msg: "",
       },
-
 
       // 设置table的表头
       columns1: [
@@ -121,16 +119,16 @@ export default {
 
     // 提交数据
     handleSubmit(name) {
-      //debugger
+      // debugger
       var self = this
       self.$refs[name].validate(valid => {
-        //debugger
+        // debugger
         if (valid) {
           var params = JSON.parse(JSON.stringify(self.formValidate));
           // let formData = new FormData();
           // formData.append("id",1);
           // formData.append("msg",50000);
-          //console.info(params)
+          // console.info(params)
           // //console.info(formData)
           updateById(params).then(res => {
             if (self.modalTitle == "新增") {
@@ -143,14 +141,8 @@ export default {
             }
             self.handleModal = false;
           }).catch(err => {
-
             self.$Message.error(err.data.msg);
-
           })
-
-
-
-
         } else {
           if (self.modalTitle == "新增") {
             self.$Message.error("新增失败!");
@@ -179,7 +171,7 @@ export default {
     },
     // 清除文本框  重置
     handleReset(name) {
-      //console.info(name);
+      // console.info(name);
       this.$refs[name].resetFields();
     },
     // 详情显示
@@ -195,17 +187,13 @@ export default {
       getSettingsList().then(res => {
         this.tableData = res.data.data;
       }).catch(err => {
-        //console.info(err)
+        // console.info(err)
       })
-
     },
 
     rowClassName(row, index) {
-
       return 'demo-table-info-row';
-
     },
-
 
   },
 

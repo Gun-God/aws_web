@@ -57,3 +57,12 @@ export const getPerCheckDataByQuery = (page, size,data) => {
     method: 'get'
   })
 }
+
+
+export const getListByCarNo = (params) => {
+  return axios.request({
+    url: 'preCheck/getListByCarNo',
+    params: params,
+    method: 'get'
+  })
+}

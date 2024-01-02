@@ -68,4 +68,14 @@ export const selectAllCamera = () => {
 }
 
 
+export const selectAllPreviewDevice = () => {
+ 
+  return axios.request({
+    url: 'scan/selectAllPreviewDevice',
+    method: 'get'
+  })
+}
+
+
+
 

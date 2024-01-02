@@ -23,6 +23,18 @@ import 'view-design/dist/styles/iview.css';
 import '@/assets/fonts/font.css';
 import echarts from "echarts";
 import filters from '@/libs/filters'
+import Viewer from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
+Vue.use(Viewer)
+Viewer.setDefaults({
+    navbar: false, //底部缩略图
+    toolbar: true, //底部工具栏
+    button: false, //右上角按钮
+    title: false, //当前图片标题
+    movable: true, //是否可以移动
+    zoomable: true, //是否可以缩放
+    transition: false //使用 CSS3 过度
+})
 
 Vue.prototype.$echarts = echarts;
 

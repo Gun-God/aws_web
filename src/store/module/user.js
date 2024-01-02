@@ -92,6 +92,7 @@ export default {
             //debugger
             //console.info("登录成功");
              localStorage.setItem('token', data.data.token);
+            
              commit('setToken', data.data.token);
              commit('setAccess', ['admin']);
              commit('setHasGetInfo', true);
@@ -101,6 +102,7 @@ export default {
               //存储用户账号
              localStorage.setItem('username', data.data.username);
              localStorage.setItem('userId', data.data.id);
+             localStorage.setItem('roleId',data.data.roleId);
            //  commit('setOrgCode', data.data.orgCode);
             // localStorage.setItem('realName', res.res.realName)
             // localStorage.setItem('userId', res.res.id)
@@ -142,12 +144,18 @@ export default {
     // },
     // 退出登录
     handleLogOut ({ state, commit }) {
+      localStorage.setItem('iShow', '');
+        localStorage.setItem('orgCode','');
       return new Promise((resolve, reject) => {
 
+        
         commit('setToken', '')
           localStorage.setItem('token', '')
           commit('setAccess', [])
           resolve()
+          localStorage.setItem('iShow', '');
+          localStorage.setItem('orgCode','');
+          localStorage.setItem('roleId','');
         // logout(state.token).then(() => {
         //   commit('setToken', '')
         //   localStorage.setItem('token', '')

@@ -2,7 +2,9 @@
   <div class="header-bar">
     <!-- <HeaderCollapsedMenu :menuList="menuList" @on-click="handleSelect" /> -->
     <!-- <sider-trigger :collapsed="collapsed" icon="md-menu" @on-change="handleCollpasedChange"></sider-trigger> -->
-    <label>治超治限管理系统</label>
+    <!-- <label>治超治限管理系统</label> -->
+        <label>{{sysName}}</label>
+
     <Menu ref="menu" v-show="!collapsed" :active-name="activeName" :open-names="openedNames" :accordion="accordion"
       :theme="theme" width="auto" @on-select="handleSelect">
       <template v-for="item in menuList">
@@ -32,6 +34,7 @@ import siderTrigger from './sider-trigger'
 import customBreadCrumb from './custom-bread-crumb'
 import './header-bar.less'
 import mixin from '../side-menu/mixin'
+import { getSystemName } from "@/api/systemSetting";
 export default {
   name: 'HeaderBar',
   mixins: [mixin],
@@ -76,7 +79,8 @@ export default {
   },
   data () {
     return {
-      openedNames: []
+      openedNames: [],
+      sysName: ""
     }
   },
   computed: {
@@ -99,8 +103,20 @@ export default {
     updateOpenName (name) {
       if (name === this.$config.homeName) this.openedNames = []
       else this.openedNames = this.getOpenedNamesByActiveName(name)
+    },
+    getSystemName() {
+      getSystemName().then((res) => {
+        // console.info(res);
+        this.sysName = res.data.data;
+      })
+      .catch((err) => {
+        console.info(err);
+      });
     }
   },
+   mounted () {
+    this.getSystemName();
+   }
   // mounted () { //这个属性就可以，在里面声明初始化时要调用的方法即可
   //     // we can implement any method here like
      

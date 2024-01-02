@@ -20,4 +20,3 @@
     name: "copy-right",
 }
 </script>
- 

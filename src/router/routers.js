@@ -67,6 +67,30 @@ export default [
   //   ]
   // },
   {
+    path: '/checkFrom',
+    name: 'checkFrom',
+    component: Main,
+    meta: {
+      notCache: true,
+      // hideInBread:localStorage.getItem('iShow')==='true'?false:true,
+      // hideInMenu: localStorage.getItem('iShow')==='true'?false:true
+      hideInBread:true,
+      hideInMenu: true
+    },
+    children: [{
+      path: '/checkFrom_page',
+      name: 'checkFrom_page',
+      meta: {
+        icon: 'logo-buffer',
+        notCache: true,
+        title: '精检',
+        
+      },
+      component: () => import('@/view/check/checkForm.vue')
+    }
+    ]
+  },
+  {
     path: '/prehis',
     name: 'prehis',
     component: Main,
@@ -131,7 +155,8 @@ export default [
     name: 'information',
     component: Main,
     meta: {
-      hideInMenu: false
+      hideInBread:localStorage.getItem('iShowSuperRole')==='true'?false:true,
+      hideInMenu: localStorage.getItem('iShowSuperRole')==='true'?false:true
     },
     children: [{
       path: '/information_page',
@@ -150,7 +175,8 @@ export default [
     name: 'user',
     component: Main,
     meta: {
-      hideInMenu: false
+      hideInBread:localStorage.getItem('iShowSuperRole')==='true'?false:true,
+      hideInMenu: localStorage.getItem('iShowSuperRole')==='true'?false:true
     },
     children: [{
       path: '/user_page',
@@ -169,7 +195,8 @@ export default [
     name: 'setting',
     component: Main,
     meta: {
-      hideInMenu: false
+      hideInBread:localStorage.getItem('iShowSuperRole')==='true'?false:true,
+      hideInMenu: localStorage.getItem('iShowSuperRole')==='true'?false:true
     },
     children: [{
       path: '/setting_page',
@@ -604,3 +631,5 @@ export default [
   //   ]
   // },
 ]
+// console.info(typeof(localStorage.getItem('iShow')) );
+

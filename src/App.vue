@@ -61,7 +61,6 @@ body {
 	background: #f8f9fe;
 }
 
-
 /* cascader 级联选择器 */
 
 .ivu-cascader-menu {
@@ -112,10 +111,6 @@ body {
 	cursor: pointer;
 }
 
-
-
-
-
 // .ivu-table .demo-table-info-row td {
 //     background-image: linear-gradient(to bottom, #00294c 85%,#133b68 );
 // 	border-color: #777777 !important;
@@ -128,13 +123,12 @@ body {
 
 }
 
+// //单元格
+// .ivu-table table td {
+//     background-image: linear-gradient(to bottom, #0f2539 85%,#1d3e63 );
+// 	border-color: rgb(71, 71, 71) !important;
 
-//单元格
-.ivu-table table td {
-    background-image: linear-gradient(to bottom, #0f2539 85%,#1d3e63 );
-	border-color: rgb(71, 71, 71) !important;
-
-}
+// }
 
 //表头
 .ivu-table tr th {
@@ -158,11 +152,8 @@ body {
 		//background-color: #c1c82d !important;
 
 	}
-	
-
 
 }
-
 
 //表格边框
 .ivu-table:before{
@@ -173,9 +164,6 @@ body {
 
 }
 
-
-
-
 .lll {
 	border-color: rgb(71, 71, 71) !important;
 	//background-color: #003767 !important;
@@ -185,7 +173,6 @@ label {
 	color: white !important;
 
 }
-
 
 //tabs
 .ivu-tabs-nav .ivu-tabs-tab {
@@ -207,7 +194,7 @@ label {
 }
 //修改弹出框背景
 .ivu-modal-content{
-	background-color: #2e425c !important;
+	background-color: #21344f !important;
 
 }
 .ivu-modal-header .ivu-modal-header-inner{
@@ -223,6 +210,5 @@ label {
 .ivu-btn>i, .ivu-btn>span{
 	line-height: 1.3rem;
 }
-
 
 </style>

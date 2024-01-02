@@ -75,5 +75,32 @@ export const selectAllOrg= () => {
   })
 }
 
+export const selectAllPerCheckOrg= () => {
+
+  return axios.request({
+    url: 'org/selectAllPerCheckOrg',
+    method: 'get'
+  })
+}
+
+export const selectAllCheckOrg= () => {
+
+  return axios.request({
+    url: 'org/selectAllCheckOrg',
+    method: 'get'
+  })
+}
+
+export const selectPerOrgByCheck= (checkOrgCode) => {
+  return axios.request({
+    url: 'org/selectPerOrgByCheckOrg',
+    // params:params,
+    params: {
+      checkCode: checkOrgCode
+    },
+    method: 'get'
+  })
+}
+
 
 
